@@ -1,7 +1,21 @@
 ### Valores faltantes (missing)
 ### Por Arturo Erdely basado en https://docs.julialang.org/en/v1/
 
-include("varios.jl")
+# funciones auxiliares
+function que(x)
+    println("object: \t", x)
+    println("typeof: \t", typeof(x))
+    println("sizeof: \t", sizeof(x))
+    println("length: \t", length(x))
+    return nothing
+end
+function stipo(T::DataType)
+    println("tipo:\t\t", T)
+    println("supertipo:\t", supertype(T))
+    println("subtipos:\t", subtypes(T))
+    return nothing
+end
+
 
 ## Propagación
 

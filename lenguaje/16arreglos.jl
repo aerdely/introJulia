@@ -1,7 +1,15 @@
 ### Arreglos multidimensionales
 ### Por Arturo Erdely basado en https://docs.julialang.org/en/v1/
 
-include("varios.jl")
+# función auxiliar
+function que(x)
+    println("object: \t", x)
+    println("typeof: \t", typeof(x))
+    println("sizeof: \t", sizeof(x))
+    println("length: \t", length(x))
+    return nothing
+end
+
 
 ## Construcción e inicialización
 #  Array  undef  zeros  ones  trues  falses
@@ -395,5 +403,3 @@ sec = collect(1:1_000_000)
 @btime v = f.(sec);
 @btime b = broadcast(f, sec);
 @btime m = map(f, sec);
-
-

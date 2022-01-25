@@ -1,8 +1,6 @@
 ### Métodos
 ### Por Arturo Erdely basado en https://docs.julialang.org/en/v1/
 
-## 19.1 Definiendo Métodos
-## methods
 
 f(x::Float64, y::Float64) = 2x + y
 println(f, "\t", typeof(f))
