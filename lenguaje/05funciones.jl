@@ -160,6 +160,15 @@ x = (a = 1, b = 1 + 1)
 que(x)
 que(x.b)
 
+t = (nombre = "Alicia", edad = 28, covid = false)
+t.edad
+keys(t)
+values(t)
+typeof(keys(t))
+collect(keys(t))
+typeof(values(t))
+collect(values(t))
+
 # Respuesta múltiple
 
 function foo(a, b)
