@@ -152,8 +152,12 @@ código = generar_código("saludar", "No")
 println(typeof(código))
 println(código)
 eval(Meta.parse(código))
-saludar("Arturo", 50)
+saludar("Arturo", 53)
 código = generar_código("conocer", "Sí")
 println(código)
 eval(Meta.parse(código))
-conocer("Arturo", 50)
+conocer("Arturo", 53)
+
+
+## Metaprogramming in Julia: A Full Overview
+#  Fuente: https://towardsdatascience.com/metaprogramming-in-julia-a-full-overview-2b4e811f1f77

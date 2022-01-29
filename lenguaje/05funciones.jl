@@ -331,7 +331,7 @@ println(broadcast(sqrt, [2, 4, 16]))
 println(η(2, 3), "\t", √5)
 
 
-## Changing names versus mutation
+## Cambiar nombres versus mutción
 
 v = [3, 5, 2]
 println(sort(v))
@@ -345,7 +345,7 @@ function setzero!(x)
 end
 y = 1
 setzero!(y)
-println(y) # it did not work! See next...
+println(y) # No funcionó, pero revisa lo que sigue:
 
 function setzero!(x)
     x[1] = 0
@@ -353,7 +353,7 @@ function setzero!(x)
 end
 y = [1]
 setzero!(y)
-println(y) # It worked! Because arrays are mutable
+println(y) # Funcionó porque los arreglos son mutables
 
 
 ## Pipes
@@ -399,3 +399,49 @@ println(y) # It worked! Because arrays are mutable
 4 + 7 * 9, (4 + 7)*9, 4 + (7 * 9)
 4 ⊕ 7 ⊗ 9, (4 ⊕ 7) ⊗ 9, 4 ⊕ (7 ⊗ 9)
 
+
+## Otras formas de definir funciones
+#  Fuente: https://levelup.gitconnected.com/functional-one-liners-in-julia-e0ed35d4ff7b
+
+# Esto:
+3 < 4
+# es lo mismo que:
+<(3, 4)
+# pero si no damos uno de los argumentos:
+<(4)
+# se crea una función. Por ejemplo:
+f = <(4) 
+f(3)
+f(4)
+# que sería lo mismo que:
+g(x) = (x < 4)
+g(3)
+g(4)
+# se puede utilizar para funciones anónimas:
+filter(<(5), 1:10)
+filter(>(5), 1:10)
+findall(==(4), [4, 8, 4, 2, 1, 5])
+findfirst(==(4), [4, 8, 4, 2, 1, 5])
+findlast(==("foo"), ["bar", "foo", "qux", "foo"])
+
+# Negación de funciones booleanas
+filter(!isempty, ["foo", "", "bar", ""])
+
+# `broadcast` versus `map`
+
+map(sqrt, [9, 16, 25]) 
+# es lo mismo que:
+broadcast(sqrt, [9, 16, 25])
+
+parse(Int, "42")
+map(s -> parse(Int, s), ["7", "42", "1331"])
+broadcast(parse, Int, ["7", "42", "1331"])
+parse.(Int, ["7", "42", "1331"])
+sqrt.(parse.(Int, ["9", "16", "25"])) 
+
+# nesting versus Pipes
+
+string(sqrt(16))
+16 |> sqrt |> string
+
+[16, 4, 9] .|> sqrt .|> string

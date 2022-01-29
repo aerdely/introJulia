@@ -268,6 +268,8 @@ A
 filter!(g, A)
 A 
 
+filter(!isempty, ["foo", "", "bar", ""])
+
 
 ## Colecciones indexables
 #  getindex  setindex!

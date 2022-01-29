@@ -140,6 +140,19 @@ println(occursin('i', "A quien madruga Dios lo ayuda"))
 println(occursin("z", "A quien madruga Dios lo ayuda"))
 println(occursin('z', "A quien madruga Dios lo ayuda"))
 
+# endswith  startswith  contains
+
+nombre_archivo_1 = "imagen01.png"
+nombre_archivo_2 = "imagen02.pdf"
+endswith(nombre_archivo_1, ".png")
+endswith(nombre_archivo_2, ".png")
+startswith(nombre_archivo_1, "imagen")
+startswith(nombre_archivo_2, "imagen")
+contains(nombre_archivo_1, "gen")
+contains(nombre_archivo_1, "g")
+contains(nombre_archivo_1, 'g')
+contains(nombre_archivo_1, "gw")
+
 # repeat  join  length  ncodeunits  codeunit
 # thisind  nextind  prevind
 

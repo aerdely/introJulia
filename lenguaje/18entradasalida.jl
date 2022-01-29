@@ -85,6 +85,10 @@ end
 # lo mismo pero con la dirección completa de cada archivo:
 readdir(directorio, join = true)
 
+# puedes usar las funciones `filter` junto con `endswith` o `startswith`
+# o `contains` para filtrar archivos, por ejemplo:
+# filter(endswith(".png"), readdir())
+
 # crear nueva carpeta en directorio de trabajo actual 
 mkdir("nuevaCarpeta")
 for e ∈ readdir(directorio)
