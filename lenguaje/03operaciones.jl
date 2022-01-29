@@ -196,8 +196,9 @@ println(x, "\t", floor(x), "\t", ceil(x), "\t", trunc(x))
 
 
 ## Conjuntos
-# ∩  intersect  intersect!  ∪  union  union!  length  setdiff  setdiff!
-# symdiff  symdiff!  issetequal  ∈  in  ∉  ⊆  issubset  isdisjoint
+# ∩  intersect  intersect!  ∪  union  union!  length  isempty
+# setdiff  setdiff! # symdiff  symdiff!  issetequal
+# ∈  in  ∉  ⊆  issubset  isdisjoint
 # ⊊  ⊈  push!  append!  Set 
 
 A = [1, 2, 3, 4]
@@ -211,6 +212,7 @@ union(A, B)
 
 C = [100, 1000]
 A ∩ B ∩ C
+isempty(A ∩ B ∩ C)
 length(A ∩ B ∩ C)
 A ∪ B ∪ C
 length(A ∪ B ∪ C)
