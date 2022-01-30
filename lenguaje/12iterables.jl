@@ -330,11 +330,11 @@ unique(values(D))
 
 # imagen inversa
 
-function imgInv(A, f)
+function imgInv(A::Array, D::Dict)
     I = []
     for a ∈ A
-        for k ∈ keys(f)
-            if f[k] == a
+        for k ∈ keys(D)
+            if D[k] == a
                 push!(I, k)
             end
         end
