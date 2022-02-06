@@ -134,6 +134,8 @@ rm("dfEjemplo.csv") # eliminar archivo
 
 using DelimitedFiles
 
+# mismo tipo de datos
+
 csv = """
 a,b,c
 1,2,3
@@ -148,6 +150,8 @@ head
 
 DataFrame(mat, vec(head))
 
+# distinto tipo de datos por columna
+
 csv2 = """
 a,b,c
 1,2,x
@@ -160,13 +164,16 @@ df2 = DataFrame(mat2, vec(head2))
 
 identity.(df2)
 
-# What is the benefit of using DelimitedFiles module over CSV.jl? 
-# The first that it is shipped with Base Julia so it does not require installation. 
-# The second is that for small files it will be faster on the first run as compilation
-# of functions from the CSV.jl package takes several seconds.
+# ¿Cuál es la ventaja de utilizar `DelimitedFiles` en lugar de `CSV.jl`?
+# La primera es que `DelimitedFiles` es parte de la biblioteca estándar
+# de Julia y por lo tanto no requiere instalación previa. La segunda es que
+# para archivos de datos pequeños será mucho más rápido en la primera ejecución
+# que en la primera compilación del paquete `CSV.jl` que toma varios segundos.
 
-# What are the drawbacks? For large data the readdlm function will be slower. 
-# Additionally it lacks many options. DelimitedFiles is best suited for 
-# reading data having homogeneous type. If columns have mixed types it becomes less convenient.
-# Similarly, e.g. when you have missing data in the CSV file you would have to manually
-# identify them after reading it in with the readdlm function.
+# ¿Cuáles son las desventajas? Para archivos de datos muy grandes la función
+# `readdlm` será más lenta. Adicionalmente, carece de diversas opciones.
+# `DelimitedFiles` es más eficiente para leer datos del mismo tipo, pero
+# si las columnas tienen distintos tipos de dato es menos eficiente.
+# Similarmente, por ejemplo, ante datos faltantes en el archivo CSV
+# tendrás que identificarlos manualmente después de leerlos con la
+# función `readdlm`.
