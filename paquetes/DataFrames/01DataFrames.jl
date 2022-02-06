@@ -127,3 +127,46 @@ rm("dfEjemplo.csv") # eliminar archivo
 
 ## Más funciones especializadas en DataFrames, consultar:
 #  https://dataframes.juliadata.org/stable/ 
+
+
+## DataFrames + DelimitedFiles (sin usar CSV)
+#  Fuente: https://bkamins.github.io/julialang/2022/02/04/delimitedfiles.html 
+
+using DelimitedFiles
+
+csv = """
+a,b,c
+1,2,3
+4,5,6
+"""
+
+mat, head = readdlm(IOBuffer(csv), ',', header = true)
+
+mat
+
+head 
+
+DataFrame(mat, vec(head))
+
+csv2 = """
+a,b,c
+1,2,x
+4,5,y
+"""
+
+mat2, head2 = readdlm(IOBuffer(csv2), ',', header = true)
+
+df2 = DataFrame(mat2, vec(head2))
+
+identity.(df2)
+
+# What is the benefit of using DelimitedFiles module over CSV.jl? 
+# The first that it is shipped with Base Julia so it does not require installation. 
+# The second is that for small files it will be faster on the first run as compilation
+# of functions from the CSV.jl package takes several seconds.
+
+# What are the drawbacks? For large data the readdlm function will be slower. 
+# Additionally it lacks many options. DelimitedFiles is best suited for 
+# reading data having homogeneous type. If columns have mixed types it becomes less convenient.
+# Similarly, e.g. when you have missing data in the CSV file you would have to manually
+# identify them after reading it in with the readdlm function.
