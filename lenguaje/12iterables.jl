@@ -294,7 +294,7 @@ A == B
 
 
 ## Diccionarios
-#  Dict  keys  values  get  get!  delete
+#  Dict  keys  values  get  get!  delete  merge
 
 D = Dict(1 => "a", 2 => "b", 3 => "a")
 D[2]
@@ -345,6 +345,11 @@ end
 D
 A = ["a", "c"]
 imgInv(A, D)
+
+D1 = Dict(['a', 'b', 'c'] .=> [1, 2, 3])
+D2 = Dict(['c', 'd'] .=> [30, 40])
+merge(D1, D2)
+merge(D2, D1)
 
 
 ## Ordenamiento y funciones relacionadas 

@@ -169,6 +169,17 @@ collect(keys(t))
 typeof(values(t))
 collect(values(t))
 
+# fusionar tuplas con nombre
+
+x = (a = 1, b = 2, c = 3)
+y = (d = 4, e = 5)
+merge(x, y)
+merge(y, x)
+
+z = (c = 30, d = 40)
+merge(x, z)
+merge(z, x)
+
 # Respuesta múltiple
 
 function foo(a, b)
