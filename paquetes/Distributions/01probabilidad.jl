@@ -246,9 +246,6 @@ params(ajusteG)
 rand(ajusteG, 10)
 
 
-## ver Pluto Notebooks: 11probaPlutoA.jl y 11probaPlutoB.jl
-
-
 ## catálogo de modelos univariados
 #  continuos: https://juliastats.org/Distributions.jl/stable/univariate/#Continuous-Distributions
 #  discretos: https://juliastats.org/Distributions.jl/stable/univariate/#Discrete-Distributions
