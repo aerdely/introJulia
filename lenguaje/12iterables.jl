@@ -78,8 +78,6 @@ Base.iterate(S::Cuadrados, state=1) = state > S.cuenta ? nothing : (state*state,
 display(iterate) # ahora iterate tiene más métodos
 methods(iterate)
 println(methods(iterate))
-# [XX] iterate(S::Cuadrados) in Main at C:\Users\aerde\Google Drive\Julia\manuals\22_interfaces.jl:61
-# [XY] iterate(S::Cuadrados, state) in Main at C:\Users\aerde\Google Drive\Julia\manuals\22_interfaces.jl:61
 
 for i ∈ Cuadrados(10)
     println(i)
@@ -106,7 +104,7 @@ println(length(Cuadrados(10)))
 methods(sum)
 Base.sum(S::Cuadrados) = (n = S.cuenta; return n*(n+1)*(2n+1)÷6)
 methods(sum)
-println(methods(sum)) # ver método [3]
+println(methods(sum)) 
 println(sum(Cuadrados(1803)))
 println(sum(i^2 for i ∈ 1:1803))
 
@@ -346,6 +344,14 @@ D
 A = ["a", "c"]
 imgInv(A, D)
 
+# o bien programando así:
+
+imgInv2(A::Array, D::Dict) =  filter(x -> D[x] ∈ A, keys(D))
+imgInv2(A, D)
+issetequal(imgInv(A, D), imgInv2(A, D))
+
+# merge
+
 D1 = Dict(['a', 'b', 'c'] .=> [1, 2, 3])
 D2 = Dict(['c', 'd'] .=> [30, 40])
 merge(D1, D2)
@@ -375,4 +381,3 @@ sort(v, by = f, rev = true)
 v
 issorted(v)
 issorted(sort(v))
-

@@ -47,8 +47,8 @@ println()
 
 g(x::Float64, y) = 2x + y
 println(methods(g))
-println(g(2.0, 3)) # ERROR
-println(g(2, 3))
+println(g(2.0, 3)) # ERROR 
+println(g(2, 3)) 
 
 f(x::Float64, y::Float64) = 2x + 2y
 println(methods(f))

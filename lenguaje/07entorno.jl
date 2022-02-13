@@ -14,7 +14,7 @@ println(texto)
 
 
 ## Entorno local
-# global  local  let  for/outer
+#  global  local  let  for/outer
 
 texto = "global"
 for i ∈ 1:3
@@ -69,6 +69,25 @@ let
 end
 println(q) # UndefVarError: q not defined
 
+x = 1
+let
+    println(x)
+    q = x + 5
+    println(q)
+    x += 1 # ERROR porque `let` es un entorno local --> usa begin ... end
+end
+println(x)
+
+x = 1
+let
+    println(x)
+    q = x + 5
+    println(q)
+    global x += 1 # aquí sí modificas el entorno global
+end
+println(x)
+
+
 # for/outer
 
 function f()
@@ -95,7 +114,7 @@ g()
 
 
 ## Constantes
-# solo para entornos globales, avisa intentos de redefinir
+#  solo para entornos globales, avisa intentos de redefinir
 
 const Λ = (√5 - 1)/2
 println(typeof(Λ))

@@ -47,11 +47,15 @@ struct ParOrdenado
     ParOrdenado(x, y) = x > y ? error("inaceptable") : new(x, y)
 end
 
+println(ParOrdenado)
+println(typeof(ParOrdenado))
+println(methods(ParOrdenado))
+
 println(ParOrdenado(2, 3))
 println(ParOrdenado(2, Int8(3)))
 println(ParOrdenado(2, 3.0))
 println(ParOrdenado(2, 3.1)) # ERROR
-println(ParOrdenado(20, 3))
+println(ParOrdenado(20, 3)) # ERROR
 
 
 ## Constructores paramétricos
@@ -60,6 +64,9 @@ struct Punto{T <: Real}
     x::T
     y::T
 end
+
+println(typeof(Punto))
+println(methods(Punto))
 
 println(Punto(1, 2)) # tipo implícito
 println(Punto(1.0, 2.0)) # tipo implícito

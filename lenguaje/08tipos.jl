@@ -77,7 +77,7 @@ using BenchmarkTools
 @btime suma₂(100)
 
 
-## Tipos abstractos
+## Tipos abstractos --> ver: https://github.com/aerdely/introJulia/blob/main/lenguaje/complementos/ArbolTipos.png
 ## supertype   subtypes
 
 println(Real <: Number)
@@ -172,7 +172,7 @@ println(AlgoNada, "\t", typeof(AlgoNada))
 x = 3.4::AlgoNada
 println(x, "\t", typeof(x))
 y = nothing::AlgoNada
-println(y, "\t", typeof(y)) # ArgumentError
+println(y, "\t", typeof(y)) 
 z = "perro"::AlgoNada # TypeError
 
 

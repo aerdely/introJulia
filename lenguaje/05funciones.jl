@@ -311,7 +311,7 @@ end
 
 
 ## Vectorizar funciones con <.> (pero en Julia esto no es lo más rápido)
-# broadcast
+#  broadcast
 
 function ∠(θ)
     for k ∈ 1:length(θ)
@@ -342,7 +342,7 @@ println(broadcast(sqrt, [2, 4, 16]))
 println(η(2, 3), "\t", √5)
 
 
-## Cambiar nombres versus mutción
+## Cambiar nombres versus mutación
 
 v = [3, 5, 2]
 println(sort(v))

@@ -180,11 +180,12 @@ damePositivo2(-2)
 
 function damePositivo(x)
     try
-        println(sqrt(x)) # si x < 0 -> ERROR
+        return sqrt(x) # si x < 0 -> ERROR
     catch # atrapar/administrar el ERROR
         println("dije positivo, tonto")
+        return 0
     end
-    println("fin")
+    println("fin") # nunca se ejecuta
 end
 damePositivo(3)
 damePositivo(-2)
@@ -192,11 +193,13 @@ sqrt(-2)
 
 function damePositivo3(x)
     try
-        println(sqrt(x))
+        return sqrt(x)
+    catch
+        println("dije positivo, tonto")
+        return 0
     finally
-        println("fin")
+        println("fin") # siempre se ejecuta al margen de try / catch
     end
 end
 damePositivo3(3)
 damePositivo3(-2)
-
