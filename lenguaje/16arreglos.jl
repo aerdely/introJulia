@@ -191,6 +191,7 @@ A[3:5, [2, 4]] = fill(1000, (3,2))
 display(A)
 
 # push!   pop!   pushfirst!  append!  prepend!  popfirst!   sort   sort!  
+# deleteat!  popat!  splice!  insert!  replace
 
 fib = [1, 1, 2, 3, 5, 8, 13]
 push!(fib, 21)
@@ -218,6 +219,34 @@ println(B)
 println(A)
 sort!(A)
 println(A)
+
+deleteat!([6,5,4,3,2,1], 3)
+deleteat!([6,5,4,3,2,1], 3:5)
+deleteat!([6,5,4,3,2,1], [1, 3])
+deleteat!([6,5,4,3,2,1], (1, 3))
+deleteat!([6,5,4,3,2,1], [true, true, false, true, false, false])
+
+a = [4, 3, 2, 1]; popat!(a, 2)
+a
+
+A = [6, 5, 4, 3, 2, 1]; splice!(A, 5)
+A 
+splice!(A, 5, -1)
+A
+splice!(A, 1, [-1, -2, -3])
+A
+
+insert!([6, 5, 4, 2, 1], 4, 3)
+
+replace([1, 2, 1, 3, 1, 1, 2, 2], 1=>0, 2=>4)
+replace([1, 2, 1, 3, 1, 1, 2, 2], 1=>0, 2=>4, count=3)
+replace(x -> isodd(x) ? 2x : x, [1, 2, 3, 4])
+
+frase = "el hueso es el hueso, todos quieren su hueso"
+replace(frase, "hueso" => "perro")
+frase
+replace(frase, "hueso" => "perro", count=2)
+frase
 
 
 ## Tipos de indexación 

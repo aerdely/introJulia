@@ -139,10 +139,10 @@ println(Cuadrados(10)[end])
 
 ## Información / transformación de colecciones iterables
 #  eltype  indexin  unique  unique!  allunique
-#  reduce  foldl  foldr  mapreduce  mapfoldl  mapfoldr
+#  reduce  foldl  foldr  mapreduce  mapfoldl  mapfoldr  accumulate  accumulate!
 #  maximum  minimum  extrema argmax  argmin  findmax  findmin
 #  sum  prod  any  all  count  first  last  collect
-#  filter  filter!
+#  filter  filter!  mapslice
 
 eltype([1, 2, 3])
 eltype(["Hola", "perros", "malditos"])
@@ -179,6 +179,9 @@ foldl(-, [1, 2, 3, 4])
 ((1 - 2) - 3) - 4
 foldr(-, [1, 2, 3, 4])
 1 - (2 - (3 - 4))
+
+accumulate(-, [1, 2, 3, 4])
+
 
 # mapreduce(f, op, itrs...; [init]) es equivalente a:
 # reduce(op, map(f, itr); init=init) pero más rápido
