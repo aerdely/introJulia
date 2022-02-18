@@ -18,9 +18,9 @@ end
 
 """
 
-    stipo(T::DataType)
+    stipo(T)
 
-Muestra tipo `T` seguido de su *supertipo* y *subtipos*
+Muestra el tipo `T` seguido de su *supertipo* y *subtipos*
 
 ```julia-repl
 julia> stipo(Real)
@@ -29,7 +29,7 @@ supertipo:      Number
 subtipos:       Any[AbstractFloat, AbstractIrrational, Integer, Rational]
 ```
 """
-function stipo(T::DataType)
+function stipo(T)
     println("tipo:\t\t", T)
     println("supertipo:\t", supertype(T))
     println("subtipos:\t", subtypes(T))

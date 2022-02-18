@@ -1,6 +1,7 @@
 module Analizar
 
-include("./varios.jl")
+using InteractiveUtils # para acceder a `subtypes` en `stipo`
+include("varios.jl")
 
 export que, tipejo, adios
 
