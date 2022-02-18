@@ -47,7 +47,7 @@ println(z, "\t", typeof(z))
 z = senolimtipo(π/2)
 println(z, "\t", typeof(z))
 
-# La suma de entros es más veloz que en punto flotante
+# La suma de enteros es más veloz que en punto flotante
 function suma₁(n)
     i₀ = Σ = 0
     for i ∈ i₀:n
@@ -268,7 +268,7 @@ println(v2, "\t", typeof(v2))
 
 
 ## Operaciones sobre Tipos
-# isa  supertype  subtypes
+# isa  supertype  supertypes  subtypes
 
 println(typeof(2))
 println(isa(2, Int8), "\t", isa(2, Int64), "\t", isa(2, Int))
@@ -319,3 +319,6 @@ t(AbstractChar)
 t(Char)
 
 t(Any) # Larga lista de subtipos
+
+supertype(Int)
+supertypes(Int)
