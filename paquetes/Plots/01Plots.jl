@@ -241,6 +241,116 @@ contour(x, y, z, xlabel = "x", ylabel = "y", size = (400, 400), fill = true)
 contour(x, y, z, xlabel = "x", ylabel = "y", size = (400, 400), fill = true, levels = 5)
 
 
+## Ejemplos de Emmett Boudreau
+## Fuente: https://towardsdatascience.com/spruce-up-your-gr-visualizations-in-julia-88a964450a7
+
+using Plots
+
+# Using function we can return what backend we are in: 
+begin
+     println("Current Plots.jl Backend:")
+     Plots.backend()
+end
+
+# And if it isn’t GR, you can set it to GR by doing:
+# Plots.gr()
+
+# The Basics
+begin
+x = rand(100); y = randn(100)
+scatter(x,y,
+    # title:
+    title = "GR Scatter Plot",
+    # X label:
+    xlabel = "Random data",
+    # Y label
+    ylabel = "Random data",
+    # Grid:
+    grid = false,
+    # Legend position
+    legend = :bottomright,
+    # Color of the marker
+    color = :lightblue,
+    # Marker stroke width and opacity
+    markerstrokewidth = 4,
+    markerstrokealpha = .75,
+    # Marker stroke color
+    markerstrokecolor = :lightblue,
+    # Adjust out y ticks
+    yticks = [-3,-1, 0, 2],
+    # Our font options
+    fontfamily = :Courier,xtickfontsize=7,ytickfontsize=9,
+    ytickfont=:Courier,xtickfont = :Courier,titlefontsize=13,
+    # We can also add annotations, super easily:
+)
+end
+
+# Of course, the title is pretty simple, just set title equal to a string,
+# relatively straight forward. We can also change the title’s font using:
+# titlefont = :FontName
+# titlefontsize = fontsize
+
+# We can also set the font globally, of course I prefer to keep them in a 
+# single instance, but it may be useful for some:
+# gr(tickfont=font("serif"), titlefont=font("serif"))
+
+begin
+x = [1,2,3,4,5,6,7,8]
+y = [3,4,5,6,7,8,9,10]
+gr(bg = :whitesmoke)
+plot(x,y,arrow = true,
+    linewidth = 6,
+    color = :pink,
+    yticks = ([0,250000,500000,750000,100000]),
+    grid = false, legend = :bottomright, label="Sample",
+    title = "Price per square footage in NYC",
+    xlabel = "Square Footage", ylabel = "Sale Price",
+    fontfamily = :Courier, xtickfontsize=4, ytickfontsize=4,
+    ytickfont = :Courier, xtickfont = :Courier, titlefontsize=10
+)
+end
+
+begin
+gr(leg = false, bg = :lightblue)
+scatter(x, y, smooth = true,
+title = "NYC Housing Pricing",arrow = true,
+markershape = :hexagon,
+    markersize = 3,
+    markeralpha = 0.6,
+    markercolor = :blue,
+    markerstrokewidth = 1,
+    markerstrokealpha = 0.0,
+    markerstrokecolor = :black,
+    linealpha = 0.5,
+    linewidth = 5,
+    linecolor = :orange,
+    textcolor = :white,
+xlabel = "Area", ylabel = "Pricing",
+fontfamily = :Courier, grid = false)
+end
+
+begin
+gr(leg = false, bg = :black)
+l = @layout [  a{0.3w} [grid(3,3)
+                         b{0.2h} ]]
+plot(
+    rand(200, 11),
+    layout = l, legend = false, seriestype = [:bar :scatter :path], textcolor = :white,
+    markercolor = :green, linecolor = :orange, markerstrokewidth = 0, yticks = [.5, 1],
+    xticks = [0, 100, 200]
+)
+end
+
+begin
+p = plot([sin, cos], zeros(0), leg = false, linecolor = :white)
+anim = Animation()
+@gif for x = range(0, stop=10π, length=100)
+         push!(p, x, Float64[sin(x), cos(x)])
+         frame(anim)
+     end
+end
+
+
 ## Para más detalles consulta la página de Plots.jl 
 #  http://docs.juliaplots.org/latest/ 
 
