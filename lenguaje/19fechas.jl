@@ -163,3 +163,9 @@ collect(range(Date(2022,1,7), Date(2022,1,16), step = Day(2)))
 
 collect(Date(2022,1,7):Month(2):Date(2022,12,7))
 collect(range(Date(2022,1,7), Date(2022,12,7), step = Month(2)))
+
+
+## Fecha y hora actual
+
+now()
+typeof(now())
