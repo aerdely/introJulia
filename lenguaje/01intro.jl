@@ -29,6 +29,18 @@ println(1, "\n", 2)
 δ = 0.001
 println("δ = ", δ)
 
+# Uso de colores y estilos
+
+printstyled("Rojo", bold = true, color = :red)
+
+printstyled("Azul", underline = true, color = :blue)
+
+printstyled("Fondo amarillo", color = :yellow, reverse = true)
+
+for i ∈ 1:255
+    printstyled(i, bold = true, color = i)
+end
+
 # Para buscar ayuda de sintaxis, directo en la terminal escribe:
 # ?println 
 
