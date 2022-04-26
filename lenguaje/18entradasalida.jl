@@ -18,11 +18,12 @@ end
 
 
 ## Archivos de texto 
-#  countlines  open  sizeof  isopen  close  readlines  read  write  eachline
+#  filesize  countlines  open  sizeof  isopen  close  readlines  read  write  eachline
 
-countlines("texto.txt")
-f = open("texto.txt", "r") # solo lectura, por default si se omite "r" (read only)
-que(f)
+archivo = pwd() * "\\complementos\\texto.txt"
+filesize(archivo) # tamaño en bytes
+countlines(archivo)
+f = open(archivo, "r") # solo lectura, por default si se omite "r" (read only)
 stipo(typeof(f))
 display(f)
 sizeof(f)
@@ -34,14 +35,14 @@ que(contenido)
 display(contenido)
 println(contenido)
 
-f = open("texto.txt") # solo lectura, por default si se omite "r"
+f = open(archivo) # solo lectura, por default si se omite "r"
 contenido = read(f, String)
 close(f)
 que(contenido)
 display(contenido)
 println(contenido)
 
-for renglón ∈ eachline("texto.txt")
+for renglón ∈ eachline(archivo)
     println(renglón)
 end
 
