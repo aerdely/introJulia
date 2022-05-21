@@ -6,8 +6,8 @@
 
 function t(tipo)
     if isa(tipo, DataType)
-        println("\nTipo:\t\t", tipo)
-        println("supertipo:\t", supertype(tipo))
+        println("\nsupertipo:\t", supertype(tipo))
+        println("Tipo:\t\t", tipo)
         println("subtipos:\t", subtypes(tipo))
     else
         println("\n$tipo no es un DataType válido")

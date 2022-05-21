@@ -9,8 +9,8 @@ println(f(2.0, 3)) # ERROR
 
 function t(tipo)
     if isa(tipo, DataType)
-        println("\nTipo:\t\t", tipo)
-        println("supertipo:\t", supertype(tipo))
+        println("\nsupertipo:\t", supertype(tipo))
+        println("Tipo:\t\t", tipo)
         println("subtipos:\t", subtypes(tipo))
     else
         println("\n$tipo no es un DataType válido")
@@ -94,3 +94,40 @@ println(h(5, 6))
 println(h())
 println(h(5))
 println(h(5.0))
+
+
+## Ejemplo con tipos abstractos 
+
+abstract type Figura end
+
+struct Trapecio <: Figura
+    altura::Float64
+    base1::Float64
+    base2::Float64
+end
+
+struct Círculo <: Figura
+    radio::Float64
+end
+
+área(fig::Trapecio) = (fig.base1 + fig.base2) * fig.altura / 2
+área(fig::Círculo) = π * fig.radio^2
+
+methods(área)
+
+t = Trapecio(4.0, 6.0, 2.5)
+c = Círculo(2.7)
+
+área(t)
+área(c)
+
+function información(fig::Figura)
+    println("Tipo de figura: ", typeof(fig))
+    println("Área = ", área(fig))
+    return nothing
+end
+
+información(t)
+información(c)
+
+# ==> Este ejemplo continuará al final de 10constructores.jl

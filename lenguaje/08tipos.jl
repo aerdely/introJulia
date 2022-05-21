@@ -322,3 +322,37 @@ t(Any) # Larga lista de subtipos
 
 supertype(Int)
 supertypes(Int)
+
+
+## Ejemplo
+
+abstract type Figura end
+
+struct Trapecio <: Figura
+    altura::Float64 
+    base1::Float64
+    base2::Float64
+end
+
+struct Círculo <: Figura
+    radio::Float64
+end
+
+typeof(Figura), typeof(Trapecio), typeof(Círculo)
+subtypes(Figura)
+supertype(Trapecio)
+supertype(Círculo)
+
+t = Trapecio(2.3, 5.0, 4.2)
+typeof(t)
+t.base2
+
+c = Círculo(2.4)
+typeof(c)
+c.radio
+
+Círculo(2) # conversión automática de entero 2 a flotante 2.0
+
+Círculo(2 + 3im) # error porque no puede convertir complejo a flotante
+
+# ==> Este ejemplo continuará al final de 09metodos.jl
