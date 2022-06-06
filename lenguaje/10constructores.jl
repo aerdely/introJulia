@@ -54,8 +54,8 @@ println(methods(ParOrdenado))
 println(ParOrdenado(2, 3))
 println(ParOrdenado(2, Int8(3)))
 println(ParOrdenado(2, 3.0))
-println(ParOrdenado(2, 3.1)) # ERROR
-println(ParOrdenado(20, 3)) # ERROR
+println(ParOrdenado(2, 3.1)) # ERROR (mensaje de Julia)
+println(ParOrdenado(20, 3)) # ERROR (mensaje definido por el usuario)
 
 
 ## Constructores paramétricos
@@ -84,7 +84,7 @@ println(methods(Punto))
 println(Punto(1, 2.0)) # ya no da error
 
 
-## Ejemplo
+## Ejemplo: Figuras geométricas
 
 abstract type Figura end
 
@@ -100,7 +100,7 @@ struct Círculo <: Figura
 end
 
 Círculo(3.2)
-Círculo(-2.3) # ERROR
+Círculo(-2.3) # ERROR (mensaje definido por el usuario)
 
 struct Trapecio <: Figura
     altura::Float64
@@ -116,7 +116,7 @@ struct Trapecio <: Figura
 end
 
 Trapecio(3, 2.1, 4) # con conversión automática de enteros a flotantes
-Trapecio(1, 2, -3) # ERROR
+Trapecio(1, 2, -3) # ERROR (mensaje definido por el usuario)
 
 Trapecio(a, b) = Trapecio(a, b, b) # en realidad, un rectángulo
 Trapecio(a) = Trapecio(a, a) # en realidad, un cuadrado
@@ -169,3 +169,44 @@ información(Trapecio(3, 4, 5))
 información(Rectángulo(2, 3))
 información(Cuadrado(6))
 información(Círculo(2))
+
+
+## Ejemplo: Sucesión de Fibonacci
+## Autor: https://twitter.com/eliascarvdev/status/1531780420186030082?s=20&t=9R2JUs-Gnv57p2lW9OvBWw
+
+struct FibSeq
+    cache::Dict{Int, Int}
+    function FibSeq()
+        cache = Dict(0 => 1, 1 => 1)
+        new(cache)
+    end
+end
+
+function (fib::FibSeq)(n::Int)
+    n ∈ keys(fib.cache) && return fib.cache[n]
+    fib.cache[n] = fib(n-1) + fib(n-2)
+    return fib.cache[n]
+end
+
+fib = FibSeq()
+
+fib(50)
+
+# pero no es tan rápido como:
+function fibonacci(n)
+    ant = 0; sig = 1; fibo = sig
+    for i ∈ 1:n
+        fibo = ant + sig
+        ant, sig = sig, fibo
+    end
+    return fibo 
+end
+
+using BenchmarkTools
+
+@btime fibonacci(50)
+
+@btime fib(50)
+
+@btime fib(50)
+
