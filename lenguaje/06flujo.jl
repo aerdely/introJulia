@@ -118,6 +118,17 @@ for 🍉 ∈ 'α':'δ', 🐼 ∈ 3:5
     println((🍉 , 🐼))
 end
 
+for i ∈ 1:2, j ∈ 3:4
+    println((i, j))
+    i = 0
+end
+for i ∈ 1:2
+    for j ∈ 3:4
+        println((i, j))
+        i = 0
+    end
+end
+
 vf = [x -> x + 1, x -> x^2, x -> x/2]
 vx = [1, 10]
 Afx = [f(x) for f ∈ vf, x ∈ vx]
@@ -145,6 +156,19 @@ end
         end
     end
 end
+
+function ∠(θ)
+    for k ∈ 1:length(θ)
+        θ[k] = sin(θ[k])
+    end
+    θ
+end;
+println(round.(∠([0, π/2, π, 3π/2, 2π])))
+θ = rand(100_000_000);
+@btime 😰 = [sin(β) for β ∈ θ]; # lista comprensiva
+@btime 😁 = sin.(θ); # vectorizado
+@btime 😂 = ∠(θ); # con ciclo <for> puro
+😂 == 😰
 
 # foreach
 
