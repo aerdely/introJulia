@@ -170,6 +170,18 @@ println(round.(∠([0, π/2, π, 3π/2, 2π])))
 @btime 😂 = ∠(θ); # con ciclo <for> puro
 😂 == 😰
 
+
+A = zeros(Int, 100, 100, 100);
+@btime for i ∈ 1:100, j ∈ 1:100, k ∈ 1:100
+           A[i, j, k] = i + j + k
+end
+B = zeros(Int, 100, 100, 100);
+@btime for i ∈ 1:100, j ∈ 1:100, k ∈ 1:100
+           B[k, j, i] = i + j + k
+end # más rápido
+B == A
+
+
 # foreach
 
 foreach(println, 'α':'ω')
