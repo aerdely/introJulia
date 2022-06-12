@@ -1,6 +1,7 @@
 ### Cadenas de caracteres
 ### Por Arturo Erdely basado en https://docs.julialang.org/en/v1/
 
+
 ## Caracteres
 # Int  Char  isvalid
 
@@ -13,6 +14,20 @@ println(Char.(0:2048))
 println(2000, "\t\t isvalid: ", isvalid(Char, 2000), "\t", Char(2000))
 println(1000_000_000, "\t isvalid: ", isvalid(Char, 1000_000_000))
 
+
+# \n (new line)  \t (tab)  \v (vertical tab)  \b (backspace)  \r (return)  chomp
+println("El mundo es color\nrosa")
+println("El mundo es color\trosa")
+println("El mundo es color\vrosa")
+println("El mundo es color\brosa")
+println("El mundo es color\rrosa")
+
+a = "Julia es lo\nmáximo\n"
+println(a, "fin")
+chomp(a)
+println(chomp(a), "fin")
+
+
 # comparaciones y operaciones
 
 println('A', "\t", Int('A'))
@@ -23,7 +38,7 @@ println('A' .+ [0, 1, 2, 3, 4])
 
 
 ## Subcadenas de caracteres
-# firstindex  lastindex  SubString  end
+# firstindex  lastindex  SubString  end  chop  strip  lstrip  rstrip
 
 texto₁ = "A quien madruga Dios lo arruga"
 println(texto₁)
@@ -47,6 +62,14 @@ println(texto₃[[25, 28, 31]], "\t", typeof(texto₃[[25, 28, 31]]))
 println(texto₁, "\t", typeof(texto₁))
 subtexto₁ = SubString(texto₁, 3, 7)
 println(subtexto₁, "\t", typeof(subtexto₁))
+
+SubString("abcdefghi", 3, 6)
+chop("abcdefghi", head = 2, tail = 3)
+
+print("INICIO"); print("     texto 123 "); println("FIN")
+print("INICIO"); print(strip("     texto 123 ")); println("FIN")
+print("INICIO"); print(lstrip("     texto 123 ")); println("FIN")
+print("INICIO"); print(rstrip("     texto 123 ")); println("FIN")
 
 
 ## Unicode y UTF-8
@@ -110,6 +133,7 @@ println("Tengo \$1,000 pesos en mi cartera")
 
 "Esto está muy largo así que \
  lo vamos a separar"
+
 
 ## Operaciones comunes
 # findfirst  findlast  findnext  findprev  occursin
@@ -186,17 +210,19 @@ println(prevind("xilófono", 5))
 
 # replace
 
-S = "Hello"
+S = "Hola perros"
 T = replace(S, "H" => "J")
 println(S, "\t", T)
 
-# uppercase  lowercase
+# uppercase  lowercase  titlecase  uppercasefirst  lowercasefirst
 
-s1 = "The quick brown fox jumps over the lazy dog α,β,γ"
-println(s1)
-s1_caps = uppercase(s1)
-s1_lower = lowercase(s1)
-println(s1_caps, "\n", s1_lower)
+t = "el mejor lenguaje de programación es Julia"
+println(t)
+t_mayúsculas = uppercase(t)
+t_minúsculas = lowercase(t)
+t_título = titlecase(t)
+t_mayúscula_inicial = uppercasefirst(t)
+t_minúscula_inicial = lowercasefirst(t_mayúscula_inicial)
 
 # split  join
 
@@ -209,3 +235,25 @@ show(r); println() #> SubString{String}["hello", "there", "bob"]
 # (the last two arguements are limit and include_empty, see docs)
 r = join(collect(1:10), ", ")
 println(r) #> 1, 2, 3, 4, 5, 6, 7, 8, 9, 10
+
+
+## Expresiones regulares (Regex)
+#  Regex  match  eachmatch
+
+rx = Regex("a.a")
+typeof(rx)
+m = match(rx, "abracadabra")
+typeof(m)
+m.match
+typeof(m.match)
+m = match(rx, "abracadabra", 5)
+
+rx = Regex("a(?<key>.)a")
+m = match(rx, "abracadabra")
+m.match
+m.captures
+m["key"]
+
+rx = r"a.a"
+m = eachmatch(rx, "abracadabra", overlap = true)
+collect(m)

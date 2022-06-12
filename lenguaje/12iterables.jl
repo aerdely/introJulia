@@ -304,8 +304,8 @@ collect(keys(D))
 values(D)
 collect(values(D))
 
-[("Alicia", 10), ("Bertha", 8), ("Cecilia", 10)]
-calif = Dict([("Alicia", 10), ("Bertha", 8), ("Cecilia", 10)])
+Dvector = [("Alicia", 10), ("Bertha", 8), ("Cecilia", 10)]
+calif = Dict(Dvector)
 calif["Bertha"]
 
 lista = Dict([1, 2, 3, 4] .=> ["Arnulfo", "Benito", "Carmelo", "David"])

@@ -34,13 +34,14 @@ F = falses(2, 3, 4)
 que(F)
 display(F)
 
-# reshape  copy  transpose  vec
+# reshape  copy  similar  transpose  vec
 
 A = zeros(Int, (3, 4))
 que(A)
 display(A)
 B = A
 C = copy(A)
+D = similar(A) # crea una matriz similar pero no inicializada (valores basura)
 tA = transpose(A)
 R = reshape(A, (6, 2))
 Rvec = vec(R)
@@ -432,3 +433,38 @@ sec = collect(1:1_000_000)
 @btime v = f.(sec);
 @btime b = broadcast(f, sec);
 @btime m = map(f, sec);
+
+
+## Constructores de arreglos
+
+## Arreglos
+
+undef # Para más info: ?undef
+Array{Int}(undef, 1, 2)
+Array{Int}(undef, 2, 1)
+Array{Int}(undef, 2)
+Array{Int, 2}(undef, (2, 3))
+Array{Float64, 3}(undef, (3, 4, 2))
+
+Matrix{Float64}(undef, 2, 3)
+Matrix <: Array
+Vector{Float64}(undef, 3)
+Vector <: Array
+
+struct Algo
+    entero::Int64
+    flotante::Float64
+end
+a = Algo(1, 1) # nótese la conversión de la segunda entrada
+isbits(a)
+A = Array{Algo}(undef, 2, 3)
+isbits(A)
+
+struct AlgoMás
+    a::Algo
+    b 
+end
+b = AlgoMás(Algo(1,1), 1)
+isbits(b)
+B = Array{AlgoMás}(undef, 2, 3)
+isbits(B)
