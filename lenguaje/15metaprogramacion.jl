@@ -7,8 +7,8 @@ function que(x)
 end
 
 ## Representación de programas
-## Meta.parse   .head   .args   Expr
-## dump   Meta.show_sexpr   eval   Symbol
+#  Meta.parse   .head   .args   Expr
+#  dump   Meta.show_sexpr   eval   Symbol
 
 texto = "2 + 3"
 ex1 = Meta.parse(texto)
@@ -127,9 +127,18 @@ eval(expresión)
 
 # macros importantes
 
-@time @show @display @which @assert
-@code_native  @code_lowered
-@macroexpand 
+@time  @show  @display  @assert
+@edit  @which  @doc 
+@code_warntype  @code_native  @code_lowered  @code_typed  @code_llvm
+@macroexpand  @test  @testset
+
+
+# quasi-macros útiles
+
+varinfo()  # qué objetos hemos definido hasta el momento
+clipboard('α')
+exit()
+
 
 # multilínea
 
