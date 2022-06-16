@@ -18,7 +18,8 @@ end
 
 
 ## Archivos de texto 
-#  filesize  countlines  open  sizeof  isopen  close  readlines  read  write  eachline
+#  filesize  countlines  open  sizeof  isopen  close  
+#  readlines readline  read  write  eachline
 
 archivo = pwd() * "\\complementos\\texto.txt"
 filesize(archivo) # tamaño en bytes
