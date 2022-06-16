@@ -177,7 +177,7 @@ contains(nombre_archivo_1, "g")
 contains(nombre_archivo_1, 'g')
 contains(nombre_archivo_1, "gw")
 
-# repeat  join  length  ncodeunits  codeunit
+# repeat  join  length  ncodeunits  codeunit  codeunits
 # thisind  nextind  prevind
 
 println(repeat(".:Z:.", 10))
@@ -199,6 +199,11 @@ println(length("xilófono", 6, 7))
 println(ncodeunits("xilófono"))
 println(codeunit("xilófono", 2))
 println(Char(codeunit("xilófono", 2)))
+println(codeunits("xilófono"))
+println(codeunit("xilófono", 4))
+println(Char(codeunit("xilófono", 4)))
+println(codeunit("xilófono", 5))
+println(Char(codeunit("xilófono", 5)))
 
 println(thisind("xilófono", 2))
 println(nextind("xilófono", 2))
