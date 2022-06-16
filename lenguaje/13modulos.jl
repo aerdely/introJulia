@@ -3,6 +3,7 @@
 
 include("complementos\\Analizar.jl")
 
+names(Analizar)
 display(que) # ERROR
 display(Analizar.que)
 Analizar.que(3.4)
@@ -34,9 +35,11 @@ tipejo(Number)
 
 parentmodule(que)
 parentmodule(tipejo)
+parentmodule(String)
 parentmodule(rand)
 
 parentmodule(randexp)
 using Random
 parentmodule(randexp)
 
+varinfo()
