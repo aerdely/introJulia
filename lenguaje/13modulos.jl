@@ -17,8 +17,8 @@ using .Analizar # importante colocar el punto antes si no es un paquete instalad
 display(que) # Ahora no hay error porque Analizar lo exporta
 que(3.4)
 println(adios()) # también fue exportado
-println(saludo()) # pero saludo() NO fue exportado
-# Así que
+println(saludo()) # ERROR porque saludo() NO fue exportado
+# Así que:
 println(Analizar.saludo())
 tipejo(Number)
 
@@ -30,3 +30,13 @@ tipejo(Number)
 
 # Con `import` sí puedes agregar nuevos métodos a sus funciones
 # pero debes llamarlas mediante `Paquete.nombrefunc`
+
+
+parentmodule(que)
+parentmodule(tipejo)
+parentmodule(rand)
+
+parentmodule(randexp)
+using Random
+parentmodule(randexp)
+
