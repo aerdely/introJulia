@@ -131,6 +131,7 @@ eval(expresión)
 @edit  @which  @doc 
 @code_warntype  @code_native  @code_lowered  @code_typed  @code_llvm
 @macroexpand  @test  @testset
+# --> Lista completa escribe en julia> @ + [tab]
 
 
 # quasi-macros útiles
