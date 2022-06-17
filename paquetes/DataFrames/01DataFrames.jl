@@ -16,11 +16,51 @@ df = DataFrame(Nombre = ["Abigail", "Beatriz", "Caritina", "Delia"],
 
 typeof(df)
 
-df.Nombre
+
+## Información del DataFrame
+
+size(df)
+
+size(df, 1)
+
+size(df, 2)
+
+nrow(df)
+
+ncol(df)
+
+describe(df)
+
+describe(df, cols = [1,3])
+
+describe(df, cols = 2:3)
+
+
+## Desplegar partes del DataFrame
+
+df.Estatura
+
+df[!, 3]
+
+df.Estatura === df[!, 3]
 
 df[:, 3]
 
+df.Estatura === df[:, 3]  # porque df[:, 3] es una copia (no vinculada)
+
 names(df)
+
+names(df, Number)
+
+names(df, String)
+
+propertynames(df)
+
+eltype(df.Edad)
+
+eachcol(df)
+
+eltype.(eachcol(df))
 
 
 ## Agregar campos (columnas)
@@ -111,10 +151,33 @@ delete!(df, [2, 5])
 
 df
 
+empty(df)
+
+df
+
+empty!(df)
+
+df
+
+
+## DataFrames grandes
+
+df = DataFrame(rand(100, 15), string.(collect('A':'Z')[1:15]))
+
+show(df, allrows = true)
+
+show(df, allcols = true)
+
+show(df, allcols = true, allrows = true)
+
+
 
 ## Escritura / lectura de archivos CSV 
 
-pwd() # directorio de trabajo actual donde se guardará el archivo
+df = DataFrame(Nombre = ["Abigail", "Beatriz", "Caritina", "Delia"],
+               Edad = [21, 19, 23, 24],
+               Estatura = [1.56, 1.74, 1.65, 1.69]
+)
 
 CSV.write("dfEjemplo.csv", df)
 
