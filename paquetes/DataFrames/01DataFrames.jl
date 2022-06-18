@@ -1,5 +1,5 @@
-### Introducción a DataFrames
-### Dr. Arturo Erdely
+### 1. Primeros pasos con DataFrames
+### Por Dr. Arturo Erdely con base en https://dataframes.juliadata.org/stable/man/basics/ 
 
 # Requiere haber instalado previamente los paquetes 
 # DataFrames, CSV, BenchmarkTools
@@ -18,7 +18,7 @@ typeof(df)
 
 
 ## Información del DataFrame
-#  size  nrow  ncol  describe  names  propertynames  # eachcol 
+#  size  nrow  ncol  describe  names  propertynames  eachcol 
 
 size(df)
 size(df, 1)
