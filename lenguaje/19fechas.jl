@@ -137,10 +137,10 @@ Dates.monthabbr(f; locale = "español")
 
 ## Aritmética de Fechas
 
-Date(2022, 1, 29) + Dates.Day(1)
-(Date(2022, 1, 29) + Dates.Day(1)) + Dates.Month(1)
-Date(2022, 1, 29) + Dates.Month(1)
-(Date(2022, 1, 29) + Dates.Month(1)) + Dates.Day(1)
+Date(2022, 1, 29) + Day(1)
+(Date(2022, 1, 29) + Day(1)) + Month(1)
+Date(2022, 1, 29) + Month(1)
+(Date(2022, 1, 29) + Month(1)) + Day(1)
 
 # Si no se agrupa con paréntesis, primero se realizan las operaciones con
 # años, luego meses, semanas y días al final:

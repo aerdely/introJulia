@@ -362,7 +362,7 @@ merge(D2, D1)
 
 
 ## Ordenamiento y funciones relacionadas 
-#  sort  sort!  sortperm  issorted
+#  sort  sort!  sortperm  issorted  reverse
 
 A = [2, 3, 1]
 sort(A)
@@ -384,3 +384,6 @@ sort(v, by = f, rev = true)
 v
 issorted(v)
 issorted(sort(v))
+
+v
+reverse(v)

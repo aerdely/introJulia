@@ -113,7 +113,7 @@ println(2 .≤ x)
 # isequal(x, y)  debiera ser isequiv porque funciona como ≡
 # isfinite(x)  isinf(x)
 # isnan(x)
-# iseven  isodd
+# iseven  isodd  isapprox
 # hash
 
 function isque(x, y)
@@ -140,6 +140,8 @@ println((NaN*(0/0))*false)
 println(((0/0)*NaN)*false)
 
 println(iseven(0), "\t", isodd(0)) # es par o impar
+
+
 
 # comparaciones encadenadas
 
