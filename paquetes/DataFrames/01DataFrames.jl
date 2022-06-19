@@ -35,6 +35,10 @@ describe(df, cols = [:Nombre, :Estatura])
 names(df)
 names(df, Number)
 names(df, String)
+names(df, Char)
+names(df, r"a") # que contengan la letra `a` (regex = regular expressions)
+names(df, Not(r"a")) # que NO contengan la letra `a` (regex)
+names(df, r"da") # que contengan "da"
 propertynames(df)
 
 eltype(df.Edad)
