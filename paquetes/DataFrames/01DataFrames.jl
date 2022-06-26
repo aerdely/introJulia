@@ -79,7 +79,7 @@ view(df, :, [:Nombre])
 # y por tanto un cambio en un dataframe creado con view
 # modifica el dataframe original.
 # Algunas operaciones con dataframes creados con `view`
-# puede resultar más lentas porque tiene que referirse al
+# pueden resultar más lentas porque tiene que referirse al
 # dataframe original.
 
 

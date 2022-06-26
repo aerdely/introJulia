@@ -19,7 +19,7 @@ begin x = 1 ; y = 2 ; println(x + y) end
 
 
 ## Evaluación condicional
-# if  elseif  else
+# if  elseif  else  ifelse
 
 function compara(x, y)
     if x < y
@@ -41,6 +41,10 @@ compara2(x, y) = x < y ? pr("$x < $y") : x > y ? pr("$x > $y") : pr("$x = $y")
 compara2(2, 3)
 compara2(7, 1)
 compara2(3, 3)
+
+esmayor(x, y) = ifelse(x > y, "sí", "no")
+esmayor(5, 4)
+esmayor(2.3, 3.2)
 
 
 ## Evaluación de corto circuito 
