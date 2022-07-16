@@ -149,6 +149,9 @@ df
 df[:, Not(:Peso)]
 
 df
+df[:, Not([:Edad, :Peso])]
+
+df
 df[:, Between(:Edad, :Estatura)]
 
 df
