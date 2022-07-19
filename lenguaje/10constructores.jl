@@ -159,6 +159,7 @@ begin
     methods(área)
 end
 
+
 function información(fig::Figura)
     println("Tipo de figura: ", typeof(fig))
     println("Área = ", área(fig))
@@ -169,6 +170,9 @@ información(Trapecio(3, 4, 5))
 información(Rectángulo(2, 3))
 información(Cuadrado(6))
 información(Círculo(2))
+
+methods(información)
+methodswith(Figura)
 
 
 ## Ejemplo: Sucesión de Fibonacci

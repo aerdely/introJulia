@@ -274,6 +274,7 @@ println(v2, "\t", typeof(v2))
 println(typeof(2))
 println(isa(2, Int8), "\t", isa(2, Int64), "\t", isa(2, Int))
 println(isa(2, Real), "\t", isa(2, Float64), "\t", isa(2, AbstractFloat))
+2 isa Real, 2 isa Float64
 
 function t(tipo)
     if isa(tipo, DataType)

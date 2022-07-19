@@ -97,6 +97,7 @@ println(h(5.0))
 
 
 ## Ejemplo con tipos abstractos 
+#  methodswith
 
 abstract type Figura end
 
@@ -114,6 +115,8 @@ end
 área(fig::Círculo) = π * fig.radio^2
 
 methods(área)
+
+methodswith(Trapecio)
 
 t = Trapecio(4.0, 6.0, 2.5)
 c = Círculo(2.7)
