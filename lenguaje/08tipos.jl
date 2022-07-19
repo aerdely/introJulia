@@ -269,6 +269,7 @@ println(v2, "\t", typeof(v2))
 
 ## Operaciones sobre Tipos
 # isa  supertype  supertypes  subtypes
+# isconcretetype  isabstracttype
 
 println(typeof(2))
 println(isa(2, Int8), "\t", isa(2, Int64), "\t", isa(2, Int))
@@ -323,16 +324,27 @@ t(Any) # Larga lista de subtipos
 supertype(Int)
 supertypes(Int)
 
+isconcretetype(Int)
+isabstracttype(Int)
+isconcretetype(Real)
+isabstracttype(Real)
+
 
 ## Ejemplo
 
 abstract type Figura end
+
+isabstracttype(Figura)
+isconcretetype(Figura)
 
 struct Trapecio <: Figura
     altura::Float64 
     base1::Float64
     base2::Float64
 end
+
+isabstracttype(Trapecio)
+isconcretetype(Trapecio)
 
 struct Círculo <: Figura
     radio::Float64
