@@ -12,8 +12,13 @@
 2 ^ 3
 sqrt(2)
 √2 # \sqrt + TAB 
-println(9 ÷ 4, "\t", 9 % 4) # división entera y residuo
-println(div(9, 4), "\t", rem(9, 4), "\t", divrem(9, 4))
+cbrt(27)
+∛27 # \cbrt + TAB 
+div(9, 4) # división entera
+9 ÷ 4 # \div + TAB
+rem(9, 4) # residuo de la división entera
+9 % 4
+divrem(9, 4)
 
 
 ## Operaciones de bits
