@@ -1,42 +1,46 @@
-### Documentar funciones
+### Documentar objetos
 ### Por Arturo Erdely basado en https://docs.julialang.org/en/v1/
 
-# Ejemplos: ejecuta todo el código y luego busca ayuda
-# sobre estas funciones en la terminal mediante ?que y ?stipo 
+# Ejemplos: una vez definido cada objeto documentado busca ayuda
+# sobre ellos en la terminal de Julia entrando al modo ayuda:
+
+# julia> ?
+# help?> función_ociosa
+
+# o bien directamente mediante:
+
+# julia> @doc función_ociosa
 
 """
-    que(x)
+    función_ociosa(x, nombre::String)
 
-Muestra objeto `x` junto con su tipo y tamaño.
-
-# Ejemplo
+Aplica la función `^` al par ordenado `(x, 2)` siempre y cuando exista un método
+definido para el tipo de objeto que sea `x`, y entrega el resultado de
+```math
+x ^ 2
 ```
-julia> que('w')
-w       Char    4 bytes
+acompañado de un saludo personalizado.
+
+## Ejemplos
+```julia
+a = función_ociosa(3, "Arturo");
+a
+b = función_ociosa("Arturo", "perro");
+b
+c = función_ociosa([1 2; 3 4], "Sandy");
+c
 ```
 """
-function que(x) # qué es esto
-    println()
-    println(x, "\t", typeof(x), "\t", sizeof(x), " bytes")
+function función_ociosa(x, nombre::String)
+    println("Hola $nombre")
+    r = x ^ 2
+    println("$x ^ 2 = $r")
+    return r
 end
 
+# También es posible documentar otro tipo de objetos
+
 """
-
-    stipo(T::DataType)
-
-Muestra tipo `T` seguido de su *supertipo* y **subtipos**
-
-## Ejemplo 
-```
-julia> stipo(Real)
-Tipo:           Real
-supertipo:      Number
-subtipos:       Any[AbstractFloat, AbstractIrrational, Integer, Rational]
-```
+`M` es una matriz aleatoria de 2 x 3
 """
-function stipo(T::DataType)
-    println("\nTipo:\t\t", T)
-    println("supertipo:\t", supertype(T))
-    println("subtipos:\t", subtypes(T))
-    return nothing
-end
+M = rand(2, 3)
