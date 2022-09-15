@@ -392,3 +392,7 @@ issorted(sort(v))
 
 v
 reverse(v)
+
+v = [["aa", "10"], ["ba", "30"], ["ab", "2"], ["ba", "5"], ["aa", "2"]]
+v2 = sort(v, by = x -> (x[1], parse(Int, x[2])))
+println(v2)
