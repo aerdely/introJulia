@@ -9,7 +9,7 @@ end
 
 
 ## Iteración
-## iterate  Base.iterate  zip  enumerate  collect 
+## iterate  Base.iterate  zip  enumerate  collect  eachsplit
 
 arreglo = ['a', 'W', '@']
 q(iterate(arreglo))
@@ -59,6 +59,11 @@ display(d)
 display(collect(d))
 
 collect(enumerate(b))
+
+himno = "Mexicanos.al.grito.de.guerra"
+split(himno, '.')
+iterador = eachsplit(himno, '.')
+collect(iterador)
 
 
 # Ejemplo importante porque se usa mucho más adelante:

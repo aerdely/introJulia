@@ -229,17 +229,32 @@ t_título = titlecase(t)
 t_mayúscula_inicial = uppercasefirst(t)
 t_minúscula_inicial = lowercasefirst(t_mayúscula_inicial)
 
-# split  join
+# split  join  rsplit  eachsplit
 
-r = split("hello, there,bob", ',')
-show(r); println() #> SubString{String}["hello", " there", "bob"]
-r = split("hello, there,bob", ", ")
-show(r); println() #> SubString{String}["hello", "there,bob"]
-r = split("hello, there,bob", [',', ' '], limit=0, keepempty=false)
-show(r); println() #> SubString{String}["hello", "there", "bob"]
-# (the last two arguements are limit and include_empty, see docs)
+r = split("hola, ahí,perro", ',')
+show(r); println() 
+r = split("hola, ahí,perro", ", ")
+show(r); println() 
+r = split("hola, ahí,perro", [',', ' '], limit=0, keepempty=false)
+show(r); println() 
 r = join(collect(1:10), ", ")
 println(r) #> 1, 2, 3, 4, 5, 6, 7, 8, 9, 10
+
+oración = "Primera frase. Segunda frase. Tercera frase. Una frase más. La última. Ahora sí ya se acabó. . . . . ..... "
+println(oración)
+split1 = split(oración, "."); println(split1)
+split2 = split(oración, "."; keepempty = false); println(split2)
+
+himno = "Mexicanos.al.grito.de.guerra"
+a = split(himno, '.')
+b = rsplit(himno, '.')
+a == b
+c = split(himno, "."; limit = 3)
+d = rsplit(himno, "."; limit = 3)
+c == d
+
+iterador = eachsplit(himno, '.')
+collect(iterador)
 
 
 ## Expresiones regulares (Regex)
