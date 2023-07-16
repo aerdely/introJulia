@@ -24,6 +24,16 @@ println(1, " ", 2)
 println(1, "\t", 2)
 println(1, "\n", 2)
 
+# Silenciar resultao de asignación
+c = 99 # se asigna y muestra en la línea de comandos
+d = 101; # se asigna pero no se muestra en la línea de comandos
+println("d = ", d)
+
+# Asignación anidada
+a = (b = 1 + 2) + 100
+println("a = ", a)
+println("b = ", a)
+
 # Uso de caracteres especiales
 # Por ejemplo: δ se obtiene mediante \delta y tecla TAB
 δ = 0.001
@@ -32,9 +42,7 @@ println("δ = ", δ)
 # Uso de colores y estilos
 
 printstyled("Rojo", bold = true, color = :red)
-
 printstyled("Azul", underline = true, color = :blue)
-
 printstyled("Fondo amarillo", color = :yellow, reverse = true)
 
 for i ∈ 1:255

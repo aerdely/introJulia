@@ -1,15 +1,20 @@
-### Números en Julia"
+### Números en Julia
 ### Por Arturo Erdely basado en https://docs.julialang.org/en/v1/
 
 ## Enteros ##
-# typeof  typemin  typemax
+# typeof  typemin  typemax  bitstring
 
 println(typeof(1)) # tipo de elemento
-println(Sys.WORD_SIZE) # computadora actual ¿a cuántos bits?
-println(Int, "\t", UInt)
+println(Sys.WORD_SIZE) # Tamaño de las palabras (bloques de memoria) en la computadora
+println(Int, "\t", UInt) # tipo de enteros con y sin signo
 
-println(typemin(Int64), "\t", typemax(Int64)) # enteros con signo, mínimo y máximo
-println(typemin(UInt64), "\t", typemax(UInt64)) # enteros sin signo, mínimo y máximo
+# típicamente el tamaño de palabras es a 64 bits
+println(typemin(Int64), "\t", typemax(Int64)) # enteros a 64 bits con signo, mínimo y máximo
+println(bitstring(typemin(Int64))) # representación binaria del mínimo
+println(bitstring(typemax(Int64))) # representación binaria del máximo
+println(typemin(UInt64), "\t", typemax(UInt64)) # enteros a 64 bits sin signo, mínimo y máximo
+println(bitstring(typemin(UInt64))) # representación binaria
+println(bitstring(typemax(UInt64))) # representación binaria
 
 x = typemax(Int64)
 println(x, "\t", typeof(x))
@@ -18,18 +23,66 @@ z = x + 2 # overflow: ¡brinca al segundo más pequeño!
 println(y, "\t", typeof(y))
 println(z, "\t", typeof(z))
 
+# Se pueden definir enteros a 128 bits:
+println(typemin(Int128), "\t", typemax(Int128)) # enteros a 128 bits con signo, mínimo y máximo
+println(bitstring(typemin(Int128))) # representación binaria del mínimo
+println(bitstring(typemax(Int128))) # representación binaria del máximo
+println(typemin(UInt128), "\t", typemax(UInt128)) # enteros a 128 bits sin signo, mínimo y máximo
+println(bitstring(typemin(UInt128))) # representación binaria
+println(bitstring(typemax(UInt128))) # representación binaria
+println(x, "\t", typeof(x))
+xx = Int128(x)
+println(xx, "\t", typeof(xx))
+println(xx + 1) # no hay overflow como con x + 1
+
 # Si se van a realizar operaciones con números enteros que exceden el rango
-# mínimo y máximo posible en computadoras de 64 bits, hay que utilizar enteros
+# mínimo y máximo posible con enteros a 128 bits, hay que utilizar enteros
 # de precisión arbitraria, de otra forma se pueden obtener resultados inesperados:
 println(3^500) # que arroja un resultado negativo y absurdo
 # Hay que definir el número entero con precisión arbitraria
 b = BigInt(3)
 println(typeof(b))
 println(b^500) 
+# Los enteros definidos mediante el tipo `BigInt` no tienen representación en bits,
+# y por tanto las operaciones artiméticas con ellos no son tan veloces como con
+# números que sí tienen representación de bits, esto sería notorio si se realiza
+# una gran cantidad de cálculos.
+
+# también hay enteros a 8, 16 y 32 bits, por ejemplo:
+println(typemin(Int8), "\t", typemax(Int8)) # enteros con signo, mínimo y máximo a 8 bits
+println(bitstring(typemin(Int8))) # representación binaria
+println(bitstring(typemax(Int8))) # representación binaria
+println(typemin(UInt8), "\t", typemax(UInt8)) # enteros sin signo, mínimo y máximo a 8 bits
+println(bitstring(typemin(UInt8))) # representación binaria
+println(bitstring(UInt8(127))) # representación binaria
+println(bitstring(typemax(UInt8))) # representación binaria
+
+# La diferencia está la cantidad de memoria que ocupa cada tipo:
+e8 = Int8(5)
+e16 = Int16(5)
+e32 = Int32(5)
+e64 = Int64(5)
+e128 = Int128(5)
+eBig = BigInt(5)
+bitstring(e8)
+sizeof(e8) # en bytes, recuerda 1 byte = 8 bits
+bitstring(e16)
+sizeof(e16)
+bitstring(e32)
+sizeof(e32)
+bitstring(e64)
+sizeof(e64)
+bitstring(e128)
+sizeof(e128)
+Base.summarysize(e128)
+# eBig no tiene representación binaria
+sizeof(eBig)
+Base.summarysize(eBig)
+# utiliza la ayuda para entender la diferencia entre `sizeof`` y `Base.summarysize` 
 
 
 ## Números de punto flotante ##
-# sizeof   100_000   0.000_001
+# sizeof   100_000   0.000_001  reinterpret 
 
 x = 1
 println(typeof(x))
@@ -37,19 +90,19 @@ x = 1.0
 println(typeof(x))
 println(2.3e3, "\t", 2.5e-4, "\n")
 
-println(1, "\t", typeof(1), "\t", sizeof(1), "\n")
+println(1, "\t", typeof(1), "\t", sizeof(1), "\n") # sizeof -> tamaño en bytes
 println(1.0, "\t", typeof(1.0), "\t", sizeof(1.0), "\n")
 
-println(10^6, "\t", typeof(10^6), "\t", sizeof(10^6), "\n")
+println(10^6, "\t", typeof(10^6), "\t", sizeof(10^6), "\n") 
 println(2.3e6, "\t", typeof(2.3e6), "\t", sizeof(2.3e6), "\n")
-println(10_000 + 1, "\t", 0.000_001 + 1, "\n")
+println(10_000 + 1, "\t", 0.000_001 + 1, "\n") # se puede utilizar _ como separador
 
 # dos ceros en el caso float
-# bitstring
-
 bitstring(5)
 length(bitstring(5))
-println(0 == -0, "\t", 0 ≡ -0)
+# el símbolo ≡ se obtiene mediante \equiv + tecla TAB y determina
+# equivalencia en representación de bits 
+println(0 == -0, "\t", 0 ≡ -0) 
 println(bitstring(0))
 println(bitstring(-0))
 println(0.0 == -0.0, "\t", 0.0 ≡ -0.0)
@@ -73,7 +126,7 @@ println(0.0/0.0, "\t", typeof(0.0/0.0))
 println(0/0, "\t", NaN*0, "\t", NaN*false, "\t", (0/0)*false)
 
 println(bitstring(reinterpret(UInt64, 0/0)))
-println(bitstring(reinterpret(UInt64, NaN))) # one bit different
+println(bitstring(reinterpret(UInt64, NaN))) # un bit de diferencia
 
 println(0/0 == NaN, "\t", 0/0 === NaN)
 println(-0.0 == 0.0, "\t", -0.0 === 0.0)
@@ -86,6 +139,8 @@ x = 10.0
 xε = x + ε
 println(x, "\t", ε, "\t", xε, "\t", nextfloat(x), "\t", prevfloat(x))
 println(xε == nextfloat(x), "\t", xε ≡ nextfloat(x))
+bitstring(x)
+bitstring(nextfloat(x))
 
 
 ## Aritmética de precisión arbitraria ##
