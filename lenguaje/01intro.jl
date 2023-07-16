@@ -24,7 +24,7 @@ println(1, " ", 2)
 println(1, "\t", 2)
 println(1, "\n", 2)
 
-# Silenciar resultao de asignación
+# Silenciar resultado de asignación
 c = 99 # se asigna y muestra en la línea de comandos
 d = 101; # se asigna pero no se muestra en la línea de comandos
 println("d = ", d)
@@ -49,8 +49,16 @@ for i ∈ 1:255
     printstyled(i, bold = true, color = i)
 end
 
-# Para buscar ayuda de sintaxis, directo en la terminal escribe:
-# ?println 
+# Para buscar ayuda de sintaxis, directo en la terminal escribe
+# primero el símbolo ? y ya activado el modo help?> escribe
+# el nombre de la instrucción seguido de la tecla intro. 
+# Si no recuerdas el nombre completo de la instrucción escribe
+# la parte que recuerdes y luego presiona la tecla de tabulación:
+# en caso de que exista una sola instrucción con esas letras
+# se autocopletará, si nada sucedió entonces nuevamente
+# presiona la recla de tabulación y aparecerá una lista de todas las opciones.
+# Por ejemplo primero intenta: ?fals
+# y luego intenta con: ?sum
 
 # Palabras reservadas para el lenguaje de programación Julia:
 #
