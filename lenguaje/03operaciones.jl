@@ -21,6 +21,16 @@ rem(9, 4) # residuo de la división entera
 divrem(9, 4)
 
 
+## Multiplicación por cero débil y fuerte
+
+NaN * 0.0
+NaN * false 
+Inf * 0.0
+Inf * false
+(-Inf) * 0.0
+(-Inf) * false
+
+
 ## Operaciones de bits
 
 ##  ~  &  |  ⊻  ⊼  ⊽  >>>  >>  <<
@@ -82,11 +92,15 @@ println("x = ", x, "\t f.(x) = ", f.(x))
 
 x = [1, 2, 3]
 y = [10, 100, 1_000]
-x + y
-x .+ y
+x + y  # operación suma de vectores
+x .+ y # operación vectorizada de suma de números
 x * y # error 
 x .* y 
+
 sum(x .* y) # producto interno
+# o bien con el paquete de la biblioteca estándar: LinearAlgebra
+using LinearAlgebra
+x ⋅ y  #  \cdot + tecla TAB
 
 
 ## Comparaciones numéricas
@@ -108,7 +122,7 @@ println(-0.0 < 0.0, "\t", -0.0 ≤ 0.0, "\t", -0.0 ≥ 0.0)
 println(-0 == 0, "\t", -0 ≡ 0)
 println(-0 < 0, "\t", -0 ≤ 0, "\t", -0 ≥ 0)
 println(-Inf < Inf, "\t", Inf == (Inf + 1), "\t", Inf ≡ (Inf + 1))
-println(NaN == NaN, "\t", NaN < NaN, "\t", NaN ≤ NaN, "\t", NaN ≠ NaN)
+println(NaN == NaN, "\t", NaN ≠ NaN, "\t", NaN === NaN, "\t", NaN < NaN, "\t", NaN ≤ NaN)
 println(typeof(NaN), "\t", sizeof(NaN))
 
 x = [1, 2, 3]
@@ -141,11 +155,7 @@ isque(NaN, Inf)
 println(NaN == NaN, "\t", NaN ≡ NaN)
 isque(NaN, NaN)
 
-println((NaN*(0/0))*false)
-println(((0/0)*NaN)*false)
-
 println(iseven(0), "\t", isodd(0)) # es par o impar
-
 
 
 # comparaciones encadenadas
@@ -156,6 +166,9 @@ println(0 < 1 < 2 < 3 < 2)
 x = [1, 2, 3, 4, 5]
 println(2 .< x .< 5)
 println(1 .≤ x .< 6)
+
+
+
 
 
 ## Redondeo
