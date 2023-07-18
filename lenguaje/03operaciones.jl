@@ -168,9 +168,6 @@ println(2 .< x .< 5)
 println(1 .≤ x .< 6)
 
 
-
-
-
 ## Redondeo
 #  round  floor  ceil  trunc
 
