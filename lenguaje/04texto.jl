@@ -46,8 +46,17 @@ texto₂ = """Me molesta que utilicen "comillas" para todo"""
 println(texto₂)
 texto₃ = "Otra forma de utilizar \"comillas\" dentro de las comillas"
 println(texto₃)
+
+println(texto₁)
+println(texto₁[3], "\t", typeof(texto₁[3]))
+println(texto₁[3:3], "\t", typeof(texto₁[3:3]))
+println(texto₁[begin], "\t", texto₁[1], "\t", texto₁[end])
 println(texto₁[3], "\t", texto₂[25], "\t", texto₃[24:25])
 println(texto₃[[25, 28, 31]], "\t", texto₃[end], "\t", texto₃[end - 1])
+
+oraciónLarga = "Esta es una oración \
+demasiado larga"
+println(oraciónLarga)
 
 println(firstindex(texto₃), "\t", lastindex(texto₃))
 println(texto₃[firstindex(texto₃)], "\t", texto₃[lastindex(texto₃)])
