@@ -45,13 +45,13 @@ end
 println(f(2, 3))
 
 function divide(x, y)
-    if y ≠ 0
-        return x / y
-    elseif x ≠ 0
-        return [x / y, " reales extendidos"]
-    else
-        return "0/0 no está definido"
+    if y == 0.0 && x ≠ 0.0
+        println("Aviso: Operación en el sistema extendido de numeros reales")
     end
+    if y == 0.0 && x == 0.0
+        println("Aviso: 0/0 no está definido")
+    end
+    return x / y
 end
 println(divide(2, 3))
 println(divide(2, 0))
@@ -63,7 +63,7 @@ g = function(x, y)
 end
 println(g(2, 3))
 
-# return type
+# Especificar tipo de dato que entrega una función 
 
 function f(x, y)::Int8
     return x + y
@@ -281,7 +281,7 @@ function alumno(nombre::String, carrera::String; edad = 0)
 end
 println(alumno("Juan", "Actuaría"))
 println(alumno("María", "MAC", edad = 19))
-println(alumno("Pedro", "Historia", 21)) # error, falta `edad`
+println(alumno("Pedro", "Historia", 21)) # error, falta especificar `edad`
 
 
 ## Alcance de los valores por defecto
@@ -302,7 +302,7 @@ println(h(2))
 map(1:10) do x
     println(2x)
 end
-# es casi lo mismo que, salvo por el formato de salida
+# es casi lo mismo que lo siguiente, salvo por el formato de salida
 println(map(x -> 2x, 1:10))
 
 map(1:10, 11:20) do x,y
@@ -339,6 +339,7 @@ println(broadcast(sqrt, [2, 4, 16]))
 
 δ(x) = (-x, x)
 η = δ ∘ sqrt ∘ +
+typeof(η)
 println(η(2, 3), "\t", √5)
 
 
@@ -421,13 +422,13 @@ println(y) # Funcionó porque los arreglos son mutables
 # pero si no damos uno de los argumentos:
 <(4)
 # se crea una función. Por ejemplo:
-f = <(4) 
-f(3)
-f(4)
+ff = <(4) 
+ff(3)
+ff(4)
 # que sería lo mismo que:
-g(x) = (x < 4)
-g(3)
-g(4)
+gg(x) = (x < 4)
+gg(3)
+gg(4)
 # se puede utilizar para funciones anónimas:
 filter(<(5), 1:10)
 filter(>(5), 1:10)
