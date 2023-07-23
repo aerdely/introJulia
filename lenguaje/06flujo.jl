@@ -36,8 +36,7 @@ compara(2, 3)
 compara(7, 1)
 compara(3, 3)
 
-pr = println
-compara2(x, y) = x < y ? pr("$x < $y") : x > y ? pr("$x > $y") : pr("$x = $y")
+compara2(x, y) = println(x < y ? "$x < $y" : x > y ? "$x > $y" : "$x = $y")
 compara2(2, 3)
 compara2(7, 1)
 compara2(3, 3)
@@ -81,7 +80,7 @@ println(false || 1000)
 
 
 ## Ciclos
-# while  for  continue  break  foreach
+# while  for  in  ∈  continue  break  foreach
 
 letra = 'a'
 while letra ≤ 'z'
@@ -105,18 +104,17 @@ while letra ≤ 'z'
 end
 println(letra)
 
-for 🐷 ∈ 'α':'ω'
+for 🐷 ∈ 'α':'ω'  # en lugar de ∈ puede usarse `in` o bien `=`
     print(🐷, " ")
 end
-println()
+
 for 🍉 ∈ ['♌', 'Q', '3', '❌']
     print(🍉, "\t")
 end
-println()
+
 for ℘ ∈ "La vida es lucha"
     print(℘, " ◐ ")
 end
-println()
 
 for 🍉 ∈ 'α':'δ', 🐼 ∈ 3:5
     println((🍉 , 🐼))
@@ -169,11 +167,9 @@ function ∠(θ)
 end;
 println(round.(∠([0, π/2, π, 3π/2, 2π])))
 θ = rand(100_000_000);
-@btime 😰 = [sin(β) for β ∈ θ]; # lista comprensiva
-@btime 😁 = sin.(θ); # vectorizado
-@btime 😂 = ∠(θ); # con ciclo <for> puro
-😂 == 😰
-
+@btime lista = [sin(β) for β ∈ θ]; # lista comprensiva
+@btime vecto = sin.(θ); # vectorizado
+@btime ciclo = ∠(θ); # con ciclo <for> puro
 
 A = zeros(Int, 100, 100, 100);
 @btime for i ∈ 1:100, j ∈ 1:100, k ∈ 1:100
@@ -194,15 +190,25 @@ foreach(println, 'α':'ω')
 ## Manejo de excepciones
 # throw  error  try/catch  finally
 
+function dameTexto(texto)
+    if typeof(texto) == String
+        println("Bien hecho")
+    else
+        throw(println("Requiere que su argumento `texto` sea tipo String y no " * string(typeof(texto))))
+    end
+    println("Fin")
+end
+dameTexto("Hola perro")
+dameTexto(3)
+
 function damePositivo1(x)
     if x > 0
         println("bien hecho")
     else
-        throw("¿no entendiste que positivo 😢?")
+        throw(DomainError(x, "¿no entendiste que positivo 😢?"))
     end
     println("fin")
 end
-
 damePositivo1(3)
 damePositivo1(-2)
 
@@ -214,7 +220,6 @@ function damePositivo2(x)
     end
     println("fin")
 end
-
 damePositivo2(3)
 damePositivo2(-2)
 
