@@ -4,6 +4,8 @@
 
 ## Entorno global
 
+# `begin` es un entorno global
+
 texto = "global"
 begin
     println(texto)
@@ -12,8 +14,20 @@ begin
 end
 println(texto)
 
+# `if` es un entorno global
 
-## Entorno local
+x = 0.0
+if x > 0.0
+    x = Inf
+elseif x < 0.0
+    x = -Inf
+else
+    x = -0.0
+end
+println(x)
+
+
+## Entorno local versus global
 #  global  local  let  for/outer
 
 texto = "global"
@@ -49,17 +63,18 @@ for i ∈ 1:1
     end
     println(z)
 end
-println(z) # ERROR
+println(z) # ERROR porque `z` no fue definida en entorno global
 
 for i ∈ 1:1
     x = i + 1
     for j ∈ 1:1
         local x = 0
+        println(x)
     end
     println(x)
 end
 
-# let
+# `let` crea un entorno local
 
 x = 1
 let
@@ -115,11 +130,12 @@ g()
 
 ## Constantes
 #  solo para entornos globales, avisa intentos de redefinir
+#  no recomendables si se busca optimizar código
 
-const Λ = (√5 - 1)/2
-println(typeof(Λ))
-println("Proporción áurea = ", Λ)
-Λ = 0.618 # aviso (warning)
-println("Proporción áurea = ", Λ)
-# pero eso no genera aviso porque es el mismo valor:
-Λ = 0.618
+const K = (√5 - 1)/2
+println(typeof(K))
+println("Proporción áurea = ", K)
+K = 0.618 # aviso (warning)
+println("Proporción áurea = ", K)
+# pero esto no genera aviso porque es el mismo valor:
+K = 0.618
