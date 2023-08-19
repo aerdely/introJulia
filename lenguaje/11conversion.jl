@@ -2,7 +2,7 @@
 ### Por Arturo Erdely basado en https://docs.julialang.org/en/v1/
 
 ## Conversión
-## typeof  convert  parse
+#  typeof  convert  parse
 
 function t(tipo)
     if isa(tipo, DataType)
