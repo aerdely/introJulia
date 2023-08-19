@@ -116,7 +116,7 @@ println(otro ∈ todossubtipos)
 
 
 ## Tipos compuestos inmutables
-## struct  fieldnames
+## struct  fieldnames  propertynames  getproperty 
 
 struct Paciente
     nombre::String
@@ -133,8 +133,12 @@ println(subtypes(Paciente))
 
 ficha = Paciente("Pedro", 'M', true, 47, 85.5, 1.72, 666)
 println(fieldnames(Paciente), "\t", typeof(fieldnames(Paciente)))
+println(propertynames(Paciente)) # información interna del objeto 
 println(ficha, "\n", typeof(ficha))
+fieldnames(ficha) # ERROR
+propertynames(ficha) # igual que `fieldnames(typeof(ficha))`
 println(ficha.peso)
+getproperty(ficha, :peso) # igual que `ficha.peso`
 display(ficha)
 ficha.peso = Float16(91.3) # ERROR porque `struct` genera objetos inmutables
 
@@ -155,6 +159,7 @@ println(nadita, "\t", typeof(nadita))
 
 
 ## Tipos compuestos mutables
+## setproperty!
 
 mutable struct Paciente2
     nombre::String
@@ -173,7 +178,10 @@ println(ficha2, "\n", typeof(ficha2))
 println(ficha2.peso)
 ficha2.peso = 91.3 # mutable struct sí es modificable (mutable)
 println(ficha2, "\n", typeof(ficha))
-
+getproperty(ficha2, :peso) # igual que `ficha2.peso`
+setproperty!(ficha2, :peso, 99.9) # igual que `ficha2.peso = 99.9`
+getproperty(ficha2, :peso)
+println(ficha2.peso)
 
 ## Tipos compuestos parcialmente mutables
 
