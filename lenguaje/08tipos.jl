@@ -1,7 +1,7 @@
 ### Tipos
 ### Por Arturo Erdely basado en https://docs.julialang.org/en/v1/
 
-## Declaración de tipo (solo en entornos locales)
+## Declaración de tipo
 ## typeof  a::b  typeassert
 
 entero = 3
@@ -11,7 +11,8 @@ println(typeassert(entero, Int))
 println(entero::Int32) # TypeError
 println(typeassert(entero, Int32)) # TypeError
 
-x::Int8 = 100 # ERROR
+x::Int8 = 100 
+typeof(x)
 
 function f()
     x::Int8 = 100
@@ -78,7 +79,7 @@ using BenchmarkTools
 
 
 ## Tipos abstractos --> ver: https://github.com/aerdely/introJulia/blob/main/lenguaje/complementos/ArbolTipos.png
-## supertype   subtypes
+##  <:  supertype   subtypes
 
 println(Real <: Number)
 println(AbstractFloat <: Real)
@@ -89,9 +90,17 @@ println(Integer <: AbstractFloat)
 println(supertype(Real))
 println(subtypes(Number))
 
+println(supertype(Signed))
+println(supertypes(Signed))
+println(subtypes(Signed))
+
+println(subtypes(Number))
 abstract type otronum <: Number end
+println(typeof(otronum))
 println(subtypes(Number))
 println(supertype(otronum))
+println(supertypes(otronum))
+println(subtypes(otronum))
 
 todossubtipos = subtypes(Any)
 println(todossubtipos)
@@ -106,7 +115,7 @@ todossubtipos = subtypes(Any)
 println(otro ∈ todossubtipos)
 
 
-## Tipos compuestos (inmutables)
+## Tipos compuestos inmutables
 ## struct  fieldnames
 
 struct Paciente
@@ -128,6 +137,15 @@ println(ficha, "\n", typeof(ficha))
 println(ficha.peso)
 display(ficha)
 ficha.peso = Float16(91.3) # ERROR porque `struct` genera objetos inmutables
+
+# Pero los elementos de un objeto inmutable pudieran ser mutables
+struct cosita
+    v::Vector
+    x::Char
+end
+ejemplo = cosita([1, 2.3, "Hola"], '@')
+ejemplo.v[2] = 4//9
+println(ejemplo)
 
 struct Nada
 end
@@ -157,20 +175,32 @@ ficha2.peso = 91.3 # mutable struct sí es modificable (mutable)
 println(ficha2, "\n", typeof(ficha))
 
 
+## Tipos compuestos parcialmente mutables
+
+mutable struct Parcial
+    a::Int64 # mutable 
+    const b::Float64 # inmutable por haber sido declarado como constante
+end
+p = Parcial(5, 2.3)
+p.a = 99
+println(p)
+p.b = 9.9 # ERROR 
+
+
 ## Unión de Tipos (caso especial de tipo abstracto) 
 
 EnteroTexto = Union{Int, AbstractString}
 println(EnteroTexto, "\t", typeof(EnteroTexto))
-x = 3::EnteroTexto
-println(x, "\t", typeof(x))
+m = 333::EnteroTexto
+println(m, "\t", typeof(m))
 y = "perro"::EnteroTexto
 println(y, "\t", typeof(y))
 z = 3.4::EnteroTexto # TypeError
 
 AlgoNada = Union{Float64, Nothing}
 println(AlgoNada, "\t", typeof(AlgoNada))
-x = 3.4::AlgoNada
-println(x, "\t", typeof(x))
+w = 3.4::AlgoNada
+println(w, "\t", typeof(w))
 y = nothing::AlgoNada
 println(y, "\t", typeof(y)) 
 z = "perro"::AlgoNada # TypeError
@@ -222,6 +252,14 @@ println(Float64 <: AbstractFloat)
 println(Punto{Float64} <: Punto{AbstractFloat})
 println(Punto{Float64} <: Punto{<:AbstractFloat})
 
+
+# Tipos paramétricos abstractos
+
+abstract type Punteado{T} end
+println(Punteado, "\t", typeof(Punteado))
+println(Punteado{Float64}, "\t", typeof(Punteado{Float64}))
+
+
 # Tipos de tuplas
 
 println(typeof((1, "perro", 2.5, π)))
@@ -229,17 +267,29 @@ println(typeof((1, "perro", 2.5, π)))
 println(τ, "\t", typeof(τ))
 println(τ.a, "\t", τ.b)
 
-# Vararg Tuple Types
+
+# Tipos de tuplas con número variable de argumentos
 
 mytupletype = Tuple{AbstractString,Vararg{Int}}
 println(mytupletype, "\t", typeof(mytupletype))
 isa(("1",), mytupletype)
+isa(("1"), mytupletype)
 isa(("1", 1), mytupletype)
 isa(("1", 1, 2), mytupletype)
 isa(("1", 1, 2, 3.0), mytupletype)
 isa(("A", (1, 2)), mytupletype)
 
-# Named Tuple Types
+
+# Tipos de tuplas con número fijo de argumentos
+
+otrotipo = Tuple{AbstractString, Vararg{Float64, 3}}
+println(otrotipo, "\t", typeof(otrotipo))
+isa(("Hola", 0.3, 0.4, 0.5), otrotipo)
+isa(("Hola", 0.3, 0.4, 0.5, 0.6), otrotipo)
+isa(("Hola", 0.3, 0.4), otrotipo)
+
+
+# Tipos de tuplas con nombres
 
 τ = (a = 1, b = "hello")
 println(τ, "\t", typeof(τ))
@@ -256,6 +306,34 @@ tupla2 = Mitupla2((19, 58.3, 'a', "amorcita"))
 println(tupla2, "\t", typeof(tupla2))
 println(tupla2.mensaje, "\t", tupla2.símbolo)
 
+@NamedTuple{a::Int, b::String}
+# es lo mismo que 
+NamedTuple{(:a, :b), Tuple{Int, String}}
+# y que
+@NamedTuple begin
+    a::Int
+    b::String
+end
+
+
+# Tipos de vectores y arreglos
+
+Vector{Float64}
+Vector{Real}
+
+a = Vector{Float64}(undef, 4)
+a[1] = 0.1
+a[2] = 2//3
+println(a, "\t", typeof(a))
+
+b = Vector{Real}(undef, 4)
+b[1] = Float16(0.2)
+b[2] = big(3)^500
+b[3] = π
+b[4] = 2//3
+println(typeof(b))
+println(b)
+
 v1 = Vector{Union{Missing, String}}(missing, 3)
 println(v1, "\t", typeof(v1))
 v1[2] = "perro"
@@ -266,17 +344,92 @@ println(v2, "\t", typeof(v2))
 v2[2] = 3.6
 println(v2, "\t", typeof(v2))
 
+Array{Int8,3}
+
+Array{Float64,2} # que es lo mismo que
+Matrix{Float64}
+
+Array{AbstractChar,1} # que es lo mismo que
+Vector{AbstractChar}
+
+Matrix{Int}(undef, 2, 3)
+Array{AbstractString, 3}(undef,2,3,4)
+
+
+## Tipos solitarios (singletons)
+## Base.issingletontype
+
+#  son tipos compuestos inmutables sin campos
+struct Solitario
+end
+
+fieldnames(Solitario)
+Base.issingletontype(Solitario)
+
+struct NoSolitario
+    nombre::String
+    número::Int64
+end
+fieldnames(NoSolitario)
+Base.issingletontype(NoSolitario)
+
+Base.issingletontype(Number)
+fieldnames(Number) # ERROR
+
+s = Solitario()
+println(s, "\t", typeof(s))
+isa(s, Solitario)
+s2 = Solitario()
+s == s2, s === s2
+
+# tipos solitarios paramétricos
+
+struct SolitoP{T}
+end
+fieldnames(SolitoP)
+Base.issingletontype(SolitoP)
+typeof(SolitoP)
+Base.issingletontype(SolitoP{Bool})
+typeof(SolitoP{Bool})
+
+
+## Tipos de funciones
+
+g(x) = x + 1
+typeof(g)
+Base.issingletontype(typeof(g))
+fieldnames(typeof(g))
+supertype(typeof(g))
+typeof(g) <: Function
+isa(g, Function)
+
+t = x -> x + 2
+t(5)
+typeof(t)
+supertype(typeof(t))
+Base.issingletontype(typeof(t))
+
+addy(y) = x -> x + y
+typeof(addy)
+Base.issingletontype(addy)
+addy(7)
+Base.issingletontype(addy(7))
+typeof(addy(7))
+isa(addy(7), Function)
+addy(7)(3)
+addy(9)(3)
+
 
 ## Operaciones sobre Tipos
-# isa  supertype  supertypes  subtypes
-# isconcretetype  isabstracttype
+#  isa  supertype  supertypes  subtypes
+#  isconcretetype  isabstracttype
 
 println(typeof(2))
 println(isa(2, Int8), "\t", isa(2, Int64), "\t", isa(2, Int))
 println(isa(2, Real), "\t", isa(2, Float64), "\t", isa(2, AbstractFloat))
 2 isa Real, 2 isa Float64
 
-function t(tipo)
+function ti(tipo)
     if isa(tipo, DataType)
         println("\nTipo:\t\t", tipo)
         println("supertipo:\t", supertype(tipo))
@@ -287,43 +440,44 @@ function t(tipo)
     return nothing
 end
 
-t(Number)
+ti(Number)
 
-t(Complex)
-t(ComplexF64)
-t(Complex{Float64})
+ti(Complex)
+ti(ComplexF64)
+ti(Complex{Float64})
 
-t(Real)
-t(Integer)
-t(BigInt)
-t(Rational)
-t(Rational{Int64})
-t(AbstractFloat)
-t(AbstractIrrational)
-t(Irrational{Float64})
-t(Irrational{BigFloat})
+ti(Real)
+ti(Integer)
+ti(BigInt)
+ti(Rational)
+ti(Rational{Int64})
+ti(AbstractFloat)
+ti(AbstractIrrational)
+ti(Irrational{Float64})
+ti(Irrational{BigFloat})
 
-t(Integer)
-t(Bool)
-t(Signed)
-t(Unsigned)
-t(UInt8)
+ti(Integer)
+ti(Bool)
+ti(Signed)
+ti(Unsigned)
+ti(UInt8)
 
-t(Rational{Int64})
-t(Rational{Int8})
-t(Rational{UInt8})
+ti(Rational{Int64})
+ti(Rational{Int8})
+ti(Rational{UInt8})
 
-t(AbstractString)
-t(String)
-t(SubString{String})
+ti(AbstractString)
+ti(String)
+ti(SubString)
+ti(SubString{String})
 
-t(AbstractChar)
-t(Char)
+ti(AbstractChar)
+ti(Char)
 
-t(Any) # Larga lista de subtipos
+ti(Any) # Larga lista de subtipos
 
-supertype(Int)
-supertypes(Int)
+supertype(Int64)
+supertypes(Int64)
 
 isconcretetype(Int)
 isabstracttype(Int)
@@ -331,7 +485,7 @@ isconcretetype(Real)
 isabstracttype(Real)
 
 
-## Ejemplo
+## Ejemplo final 
 
 abstract type Figura end
 
@@ -356,9 +510,9 @@ subtypes(Figura)
 supertype(Trapecio)
 supertype(Círculo)
 
-t = Trapecio(2.3, 5.0, 4.2)
-typeof(t)
-t.base2
+trap = Trapecio(2.3, 5.0, 4.2)
+typeof(trap)
+trap.base2
 
 c = Círculo(2.4)
 typeof(c)
