@@ -1,6 +1,8 @@
 ### Métodos
 ### Por Arturo Erdely basado en https://docs.julialang.org/en/v1/
 
+##  Métodos
+#   methods
 
 f(x::Float64, y::Float64) = 2x + y
 println(f, "\t", typeof(f))
@@ -43,7 +45,7 @@ println("g(true, 'Ψ') = ", g(true, 'Ψ'))
 println()
 
 
-## Ambigüedades de Métodos
+## Ambigüedades de métodos
 
 g(x::Float64, y) = 2x + y
 println(methods(g))
@@ -118,10 +120,10 @@ methods(área)
 
 methodswith(Trapecio)
 
-t = Trapecio(4.0, 6.0, 2.5)
+tr = Trapecio(4.0, 6.0, 2.5)
 c = Círculo(2.7)
 
-área(t)
+área(tr)
 área(c)
 
 function información(fig::Figura)
@@ -130,7 +132,7 @@ function información(fig::Figura)
     return nothing
 end
 
-información(t)
+información(tr)
 información(c)
 
 # ==> Este ejemplo continuará al final de 10constructores.jl
