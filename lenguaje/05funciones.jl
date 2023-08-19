@@ -162,7 +162,11 @@ que(x.b)
 
 t = (nombre = "Alicia", edad = 28, covid = false)
 t.edad
+getproperty(t, :edad) # igual que `t.edad`
+t[2]
+getindex(t, 2) # igual que `t[2]`
 keys(t)
+propertynames(t) # igual que `keys(t)`
 values(t)
 typeof(keys(t))
 collect(keys(t))
