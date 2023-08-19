@@ -211,6 +211,3 @@ using BenchmarkTools
 @btime fibonacci(50)
 
 @btime fib(50)
-
-@btime fib(50)
-
