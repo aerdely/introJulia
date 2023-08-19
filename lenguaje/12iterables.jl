@@ -119,8 +119,10 @@ println(sum(i^2 for i ∈ 1:1803))
 
 arreglo = ['a', 'W', '@']
 println(arreglo[2])
-println(getindex(arreglo, 2))
+println(getindex(arreglo, 2))  # igual que `arreglo[2]`
 println(firstindex(arreglo), "\t", lastindex(arreglo))
+setindex!(arreglo, 'X', 2)  # igual que `arreglo[2] = 'X'`
+println(arreglo)
 
 methods(getindex)
 function Base.getindex(S::Cuadrados, i::Int)
@@ -145,7 +147,8 @@ println(Cuadrados(10)[end])
 ## Información / transformación de colecciones iterables
 #  eltype  indexin  unique  unique!  allunique
 #  reduce  foldl  foldr  mapreduce  mapfoldl  mapfoldr  accumulate  accumulate!
-#  maximum  minimum  extrema argmax  argmin  findmax  findmin
+#  cumsum  cumsum!  cumprod  cumprod! 
+#  maximum  minimum  extrema argmax  argmin  findmax  findmin  findall
 #  sum  prod  any  all  count  first  last  collect
 #  filter  filter!  mapslice
 
@@ -186,7 +189,9 @@ foldr(-, [1, 2, 3, 4])
 1 - (2 - (3 - 4))
 
 accumulate(-, [1, 2, 3, 4])
-
+accumulate(+, [1, 2, 3, 4]) # igual que `cumsum([1, 2, 3, 4])`
+accumulate(*, [1, 2, 3, 4]) # igual que `cumprod([1, 2, 3, 4])`
+accumulate(*, 'a':'e')
 
 # mapreduce(f, op, itrs...; [init]) es equivalente a:
 # reduce(op, map(f, itr); init=init) pero más rápido
@@ -229,7 +234,7 @@ argmax(f, A) # por empate te da el primero que encuentra
 # análogamente `argmin`
 
 A = [2, -100, 99, 4, 5, 99]
-findmax(A) # (valor máximo, posición del primer valor máximo)
+findmax(A) # (valor máximo y posición del primer valor máximo)
 f(x) = x^2
 findmax(f, A)
 # y lo análogo con `findmin`
@@ -257,7 +262,7 @@ count(x -> (x < 4), [1, 3, 4, 5, 6])
 
 A = 'a':'z'
 first(A)
-first(A, 5)
+first(A, 5)  # ERROR
 B = collect(A)
 first(B)
 first(B, 5)
