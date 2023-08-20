@@ -1,9 +1,9 @@
-module Analizar
+module MiModulo
 
 export que, tipejo, adios
 
 using InteractiveUtils # para acceder a `subtypes` en `stipo`
-include("varios.jl")
+include("MisFunciones.jl")
 
 saludo() = "Hola perro"
 adios() = "Adiós perro maldito"

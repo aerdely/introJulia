@@ -4,7 +4,7 @@
 Muestra objeto `x` junto con su tipo y tamaño.
 
 # Ejemplo
-```julia-repl
+```julia
 julia> que('w')
 w       Char    4 bytes
 ```
@@ -22,7 +22,7 @@ end
 
 Muestra el tipo `T` seguido de su *supertipo* y *subtipos*
 
-```julia-repl
+```julia
 julia> stipo(Real)
 Tipo:           Real
 supertipo:      Number
