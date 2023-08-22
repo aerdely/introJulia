@@ -10,10 +10,17 @@ end
 #  Meta.parse   .head   .args   Expr
 #  dump   Meta.show_sexpr   eval   Symbol
 
+parentmodule(Meta) # `Meta` es un submódulo de `Base`
+names(Meta)
+
 texto = "2 + 3"
 ex1 = Meta.parse(texto)
 que(ex1)
+
+propertynames(ex1)
+ex1.head
 que(ex1.head)
+ex1.args
 que(ex1.args)
 
 ex2 = Expr(:call, :+, 2, 3)
@@ -25,7 +32,6 @@ dump(ex2)
 ex3 = Meta.parse("(2 + 3) / 4")
 que(ex3)
 dump(ex3)
-Meta.show_sexpr(ex3)
 
 eval(ex1)
 eval(ex2)
@@ -106,7 +112,7 @@ macro saluda(nombre)
 end
 
 @saluda("Arturo")
-@saluda "Arturo" # funciona igual
+@saluda "Juan" # funciona igual
 
 println(@macroexpand @saluda "Arturo")
 
@@ -137,8 +143,13 @@ eval(expresión)
 # quasi-macros útiles
 
 varinfo()  # qué objetos hemos definido hasta el momento
-clipboard('α')
-exit()
+
+versioninfo() # versión de Julia e info de la computadora
+
+clipboard('α') # funciona como <copy> 
+algo = clipboard() # funciona como <paste> incluso desde fuera de Julia
+
+exit() # cierra la terminal de Julia
 
 
 # multilínea
@@ -168,6 +179,9 @@ println(código)
 eval(Meta.parse(código))
 conocer("Arturo", 53)
 
+
+## My first macro in Julia 
+#  https://giordano.github.io/blog/2022-06-18-first-macro/ 
 
 ## Metaprogramming in Julia: A Full Overview
 #  Fuente: https://towardsdatascience.com/metaprogramming-in-julia-a-full-overview-2b4e811f1f77
