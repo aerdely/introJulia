@@ -1,7 +1,7 @@
 ### Módulos
 ### Por Arturo Erdely basado en https://docs.julialang.org/en/v1/
 
-# Un módulo es un paquete de código que encapsula variables, funciones, tipos, etc.
+# Un módulo es un paquete de código que encapsula variables, funciones, tipos, etc.,
 # para poder ser utilizado (`using`) o importado (`import`) dentro de otro código.
 
 # Se utilizan para crear «espacios de nombres» (namespaces) que son contenedores
@@ -15,7 +15,7 @@
 # Los elementos esenciales de un `module` en julia son:
 # 1) `export`: Los objetos que el módulo exporta a quien lo llame
 # 2) `include`: El código que el módulo utiliza a partir de otros archivos .jl
-# 3) `import`, `using`: Módulos que el requiere utilizar el actual módulo
+# 3) `import`, `using`: Módulos que requiere utilizar el actual módulo
 # 4) Definiciones de objetos dentro del propio módulo, que pueden o no exportarse
 # 5) Submódulos: para una mejor organización jerárquica del código relacionado
 
@@ -87,17 +87,28 @@ end # module
 # De hecho nótese el mensaje recibido después de ejecutar este código: Main.CosasChidas
 # que significa que el módulo `CosasChidas` quedó de hecho como submódulo de `Main`.
 
+parentmodule(CosasChidas)
 varinfo()
+names(CosasChidas) # solo nombres de lo que exporta el módulo
 
 # El módulo ya fue creado pero lo que exporta todavía no está disponible:
 
 lindo # UndefVarError: `lindo` not defined
 PERRO # UndefVarError: `PERRO` not defined
 
-# Para que esté disponible lo que exporta un módulo:
+# A menos que se indique el módulo al cual pertenecen (module path):
+
+CosasChidas.lindo
+CosasChidas.PERRO
+CosasChidas.Perro
+
+# Para que esté disponible lo que exporta un módulo, sin necesidad del module path:
 
 using Main.CosasChidas  # o bien: using .CosasChidas
 
+PERRO
+propertynames(PERRO)
+PERRO.nombre
 frase = lindo(PERRO.nombre)
 varinfo()
 
@@ -118,7 +129,7 @@ varinfo()
 # module path. 
 
 # Nótese que para usar un módulo que está en `Main` se ocupa la sintaxis:
-# using Main.MiMódulo o bien using .MiMódulo
+# `using Main.MiMódulo` o bien `using .MiMódulo`
 # pero si se trata de un paquete ya instalado de Julia no es necesario el punto:
 # using NombrePaqueteJulia
 
@@ -143,7 +154,7 @@ MatesChidas.g(1)
 # Pareciera más cómodo ocupar `using` para no tener que escribir todo
 # el module path, pero cuando se usan muchos módulos que tienen algunos
 # nombres de objetos iguales entrarían en conflicto, y en tal caso
-# es mejor llamarlos importarlos con `import`.
+# es mejor llamarlos (importarlos) con `import`.
 
 # Se pueden llamar varios módulos mediante una sola instrucción,
 # separados por comas, por ejemplo:
@@ -284,7 +295,7 @@ f1("mundo cruel")
 # y/o vía un `import` específico de nombres es renombrando objetos de los módulos mediante
 # la instrucción `as`.
 
-# Por ejemplo `println` y `supertypes` son parte de los módulo `Base` e `InteractiveUtils`
+# Por ejemplo `println` y `supertypes` son parte de los módulos `Base` e `InteractiveUtils`
 # que por default carga el lenguage de programación Julia:
 
 parentmodule(println)
@@ -292,46 +303,46 @@ parentmodule(supertypes)
 
 # Si un módulo pretente exportar objetos con algunos de esos nombres hay conflicto:
 
-module MiModulo
+module MiModulito
 export println
 println(x) = "Imprime $x"
 supertypes(x) = "Supertipo $x"
 end # module
 
-using .MiModulo
-# WARNING: using MiModulo.println in module Main conflicts with an existing identifier.
+using .MiModulito
+# WARNING: using MiModulito.println in module Main conflicts with an existing identifier.
 # y en este caso lo ignora:
 
 println("Nada")
 
 # tendría que llamarse agregando su module path:
 
-MiModulo.println("Nada")
+MiModulito.println("Nada")
 
 # Con `import` no habría conflicto si se importa el módulo completo:
 
-module MiModulo2
+module MiModulito2
 export println
 println(x) = "Imprime $x"
 supertypes(x) = "Supertipo $x"
 end # module
 
-import .MiModulo2
+import .MiModulito2
 
 # ya que en este caso `import` hace caso omiso de `export`, y todos los objetos
 # importados requieren module path, evitando así cualquier conflicto:
 
-MiModulo2.println("Nada")
-MiModulo2.supertypes("Bla")
+MiModulito2.println("Nada")
+MiModulito2.supertypes("Bla")
 
 # pero si se les importa directamente entonces sí hay conflicto:
 
-import .MiModulo2: println
-# WARNING: ignoring conflicting import of MiModulo2.println into Main
+import .MiModulito2: println
+# WARNING: ignoring conflicting import of MiModulito2.println into Main
 
 # Una solución a esto es renombrar:
 
-import .MiModulo2: println as imprime
+import .MiModulito2: println as imprime
 
 imprime
 parentmodule(imprime)
@@ -346,12 +357,12 @@ imprime("Nada")
 
 module A
 export fun   
-fun() = 0
+fun() = 1
 end 
 
 module B
 export fun
-fun() = 1
+fun() = 2
 end
 
 using .A, .B
@@ -374,8 +385,8 @@ gun()
 ## Submódulos
 
 # Por default cualquier módulo incorpora `using Core` y `using Base` aunque podría evitarse
-# utilizando `baremodule` tema sobre el que no mencionaremos más, pero es importante tomarlo
-# en cuanta al definir módulos dentro de módulos (submódulos) para evitar entrar en conflicto
+# utilizando `baremodule` tema sobre el que no mencionaré más, pero es importante tomarlo
+# en cuenta al definir módulos dentro de módulos (submódulos) para evitar entrar en conflicto
 #
 
 ######
@@ -401,6 +412,13 @@ prin2(x) = Sub2.print(x)
 end # SuperModulo 
 ######
 
+# En este momento podemos acceder a objetos de los submódulos con el module-submodule path, 
+# por ejemplo:
+
+SuperModulo.Sub1.println("Bla")
+
+# Ahora llamamos al módulo principal:
+
 using .SuperModulo
 
 prin1("Hola")
@@ -409,13 +427,13 @@ prin2("Hola")
 
 ### Otro ejemplo
 
-# En este caso el módulo se encuentra en otro archivo, en este caso en el mismo
+# En este ejemplo el módulo se encuentra en otro archivo, en este caso en el mismo
 # directorio (de lo contrario hay que especificar el path completo), que a su vez
 # requiere de otro archivo (en este caso, también en el mismo directorio).
 
 include("MiModulo.jl")
 
-names(MiModulo)
+names(MiModulo) # los nombres que exporta el módulo
 que # ERROR porque el módulo no ha sido llamado con `using`
 MiModulo.que
 MiModulo.que(3.4)
