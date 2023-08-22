@@ -14,14 +14,14 @@
 """
     función_ociosa(x, nombre::String)
 
-Aplica la función `^` al par ordenado `(x, 2)` siempre y cuando exista un método
+Aplica la función `^` al *par* ordenado `(x, 2)` siempre y cuando exista un **método**
 definido para el tipo de objeto que sea `x`, y entrega el resultado de
 ```math
 x ^ 2
 ```
 acompañado de un saludo personalizado.
 
-## Ejemplos
+# Ejemplos
 ```julia
 a = función_ociosa(3, "Arturo");
 a
@@ -38,9 +38,16 @@ function función_ociosa(x, nombre::String)
     return r
 end
 
-# También es posible documentar otro tipo de objetos
+@doc función_ociosa
+
+función_ociosa(3, "Arturo")
+
+
+# También es posible documentar otro tipo de objetos (arreglos, tipos, módulos)
 
 """
 `M` es una matriz aleatoria de 2 x 3
 """
 M = rand(2, 3)
+
+@doc M 
