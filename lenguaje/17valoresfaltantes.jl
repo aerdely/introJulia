@@ -1,7 +1,7 @@
 ### Valores faltantes (missing)
 ### Por Arturo Erdely basado en https://docs.julialang.org/en/v1/
 
-# funciones auxiliares
+# función auxiliar
 function que(x)
     println("object: \t", x)
     T = typeof(x)
