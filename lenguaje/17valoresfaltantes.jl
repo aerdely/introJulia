@@ -4,15 +4,11 @@
 # funciones auxiliares
 function que(x)
     println("object: \t", x)
-    println("typeof: \t", typeof(x))
-    println("sizeof: \t", sizeof(x))
-    println("length: \t", length(x))
-    return nothing
-end
-function stipo(T::DataType)
+    T = typeof(x)
     println("tipo:\t\t", T)
     println("supertipo:\t", supertype(T))
     println("subtipos:\t", subtypes(T))
+    println("memory: \t", Base.summarysize(x), " bytes")
     return nothing
 end
 
@@ -20,12 +16,14 @@ end
 ## Propagación
 
 que(missing)
-stipo(Missing)
+que(Missing)
 
 println(missing + 1)
 println("texto" * missing)
 a = missing/2
 que(a)
+ismissing(a)
+ismissing([])
 
 
 ## Igualdad y comparación
@@ -34,11 +32,15 @@ println(missing == 1) # missing
 println(missing > 2) # missing
 println(missing == missing) # missing
 println(missing === missing) # true
-println(isequal(missing, missing))
+println(isequal(missing, missing)) # true porque es lo mismo que missing === missing
+
+# Se considera a `missing` como el valor más grande para que la función
+# `sort` los deje hasta el final:
 
 println(isless(1, missing)) # true
 println(isless(Inf, missing)) # true
 println(isless(missing, missing)) # false
+sort([2, missing, -1, missing, 0, -Inf, Inf, NaN])
 
 
 ## Operaciones lógicas
@@ -55,6 +57,7 @@ println(missing & false)
 
 println(!missing)
 println(true ⊻ missing) # \xor+TAB = ⊻
+println(true | missing)
 
 
 ## Control de flujo y operadores de corto circuito
@@ -74,23 +77,19 @@ println(missing && false) # ERROR
 
 A = fill(missing, 2, 3)
 que(A)
-display(A)
 A[1, 2] = 99 # ERROR
 
 A = ones(2, 3)
-display(A)
 A[1, 2] = missing # ERROR
 
 v = [1, missing]
 que(v)
-display(v)
 v[1] = missing
 v[2] = 99
 display(v)
 
 A = Array{Union{Missing, Float64}}(missing, 2, 3)
 que(A)
-display(A)
 A[1, 2] = 3.0
 display(A)
 
@@ -99,7 +98,6 @@ display(A)
 
 X = [2.0, missing, 1.0, 3.0, missing, Inf]
 que(X)
-display(X)
 Y = skipmissing(X)
 que(Y)
 display(Y)
