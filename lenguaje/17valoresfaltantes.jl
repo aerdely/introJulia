@@ -94,7 +94,7 @@ A[1, 2] = 3.0
 display(A)
 
 
-## Ignorar valores faltantes en operaciones
+## Ignorar valores faltantes en operaciones: `skipmissing`
 
 X = [2.0, missing, 1.0, 3.0, missing, Inf]
 que(X)
