@@ -3,7 +3,7 @@
 
 
 ## Expresiones compuestas
-# begin
+#  begin
 
 z = begin
     x = 1
@@ -19,7 +19,7 @@ begin x = 1 ; y = 2 ; println(x + y) end
 
 
 ## Evaluación condicional
-# if  elseif  else  ifelse
+#  if  elseif  else  ifelse
 
 function compara(x, y)
     if x < y
@@ -47,7 +47,7 @@ esmayor(2.3, 3.2)
 
 
 ## Evaluación de corto circuito 
-# &&  ||  &  |
+#  &&  ||  &  |
 
 t(x) = (println(x) ; true)
 f(x) = (println(x) ; false)
@@ -80,7 +80,7 @@ println(false || 1000)
 
 
 ## Ciclos
-# while  for  in  ∈  continue  break  foreach
+#  while  for  in  ∈  continue  break  foreach
 
 letra = 'a'
 while letra ≤ 'z'
@@ -188,7 +188,15 @@ foreach(println, 'α':'ω')
 
 
 ## Manejo de excepciones
-# throw  error  try/catch  finally
+#  throw  error  try/catch  finally
+
+# Solo mensajes (texto)
+error("¡Cometiste un error muy grave!")
+
+# Mensaje de error por medio de un objeto no necesarimente de texto
+a = 0/0
+throw(a)
+throw("¡No hagas eso!")
 
 function dameTexto(texto)
     if typeof(texto) == String

@@ -23,7 +23,7 @@ que(a)
 
 ## Archivos de texto 
 #  filesize  countlines  open  isopen  close  
-#  readlines readline  read  write  eachline  rm
+#  readlines  readline  readuntil  read  write  eachline  rm  evalfile
 
 # Importante --> Text encoding: UTF-8
 
@@ -39,6 +39,13 @@ isopen(f)
 que(contenido)
 display(contenido)
 println(contenido)
+
+readlines("MiTexto.txt")
+readlines("MiTexto.txt", keep = true)
+readline("MiTexto.txt")
+readline("MiTexto.txt", keep = true)
+
+readuntil("MiTexto.txt", "á")
 
 f = open(archivo) # solo lectura, por default si se omite "r"
 contenido = read(f, String)
@@ -79,7 +86,8 @@ rm("MiTextoNuevo.txt") # eliminar archivo
 
 
 ## Directorios
-#  pwd  readdir  cd  mkdir  rm
+#  pwd  readdir  cd  mkdir  isdir  isfile
+#  dirname  basename  joinpath  rm  homedir
 
 pwd() # directorio (o carpeta) de trabajo actual
 directorio = pwd()
@@ -93,40 +101,72 @@ end
 # lo mismo pero con la dirección completa de cada archivo:
 readdir(directorio, join = true)
 
-# puedes usar las funciones `filter` junto con `endswith` o `startswith`
-# o `contains` para filtrar archivos, por ejemplo:
-# filter(endswith(".png"), readdir())
+#=
+puedes usar las funciones `filter` junto con `endswith` o `startswith`
+o `contains` para filtrar archivos, por ejemplo:
+filter(endswith(".png"), readdir())
+=#
 
 # crear nueva carpeta en directorio de trabajo actual 
-mkdir("nuevaCarpeta")
+nueva = "nuevaCarpeta"
+mkdir(nueva)
 for e ∈ readdir(directorio)
     println(e)
 end
+println(directorio * "\\" * nueva)
+isdir(directorio * "\\" * nueva)
+isfile(directorio * "\\" * nueva)
 
 # cambiar directorio de trabajo 
 pwd()
-cd(pwd() * "\\nuevaCarpeta")
+cd(pwd() * "\\" * nueva)
 pwd()
-readdir(pwd())
+readdir() # es lo mismo que readdir(pwd())
 f = open("prueba.txt", "w")
 write(f, "Hola amigos.")
 close(f)
-readdir(pwd())
+readdir()
+isdir("prueba.txt")
+isfile("prueba.txt")
+readlines("prueba.txt")
+readdir(join = true)
+readdir(join = true)[1]
+isdir(readdir(join = true)[1])
+isfile(readdir(join = true)[1])
+basename(readdir(join = true)[1])
+dirname(readdir(join = true)[1])
+joinpath(dirname(readdir(join = true)[1]), basename(readdir(join = true)[1]))
+
+# mover archivos
+mv("prueba.txt", "pruebita.txt") 
+readdir()
+readlines("pruebita.txt")
+write("prueba2.txt", "Perros malditos")
+readdir()
+readlines("prueba2.txt")
+mv("prueba2.txt", "pruebita.txt") # ERROR
+readdir()
+mv("prueba2.txt", "pruebita.txt", force = true)
+readdir()
+readlines("pruebita.txt")
 
 # eliminar archivos o carpetas
-rm("prueba.txt")
-directorio = pwd()
-readdir(directorio)
-d = SubString(directorio, 1, length(directorio) - length("nuevaCarpeta"))
+rm("pruebita.txt")
+directorioactual = pwd()
+readdir(directorioactual)
+println(nueva)
+d = chopsuffix(directorio, nueva)
 cd(d)
 pwd()
 "nuevaCarpeta" ∈ readdir(pwd())
 rm("nuevaCarpeta")
 "nuevaCarpeta" ∈ readdir(pwd())
 
+homedir() # carpeta de usuario establecida por el sistema operativo
+
 
 ## Archivos de datos numéricos
-# Hay que convertir a texto / desconvertir de texto
+#  --> Hay que convertir a texto / desconvertir de texto
 
 a = 1
 b = 2.5

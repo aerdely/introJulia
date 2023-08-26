@@ -113,7 +113,7 @@ println(bitstring(2), "\t", length(bitstring(2)))
 println(bitstring(2.0), "\t", length(bitstring(2.0)))
 println(bitstring(2.1), "\t", length(bitstring(2.1)))
 
-# Inf  -Inf  NaN
+# Inf  -Inf  NaN  typemin  typemax  floatmin  floatmax
 
 println(1/0, "\t", 2.0/0, "\t", -3/0, "\t", 4.1/Inf, "\t", 0/0, "\t", 0*Inf)
 println(0*Inf, "\t", false*Inf, "\t", 0*(-Inf), "\t", false*(-Inf))
@@ -131,6 +131,12 @@ println(bitstring(reinterpret(UInt64, NaN))) # un bit de diferencia
 println(0/0 == NaN, "\t", 0/0 === NaN)
 println(-0.0 == 0.0, "\t", -0.0 === 0.0)
 
+typemin(Float64), typemax(Float64)
+floatmin(Float64), floatmax(Float64)
+println(floatmin(Float32), "  ", floatmax(Float32))
+println(floatmin(Float16), "  ", floatmax(Float16))
+
+
 # Precisión de máquina (epsilon)
 # eps  prevfloat  nextfloat
 
@@ -144,7 +150,7 @@ bitstring(nextfloat(x))
 
 
 ## Aritmética de precisión arbitraria ##
-# BigInt  BigFloat  parse  factorial
+# BigInt  BigFloat  parse  factorial  
 
 function que(x)
     println(x, "\t typeof: ", typeof(x), "\t sizeof: ", sizeof(x))

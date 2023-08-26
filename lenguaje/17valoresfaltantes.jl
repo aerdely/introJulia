@@ -34,8 +34,10 @@ println(missing == missing) # missing
 println(missing === missing) # true
 println(isequal(missing, missing)) # true porque es lo mismo que missing === missing
 
-# Se considera a `missing` como el valor más grande para que la función
-# `sort` los deje hasta el final:
+#=
+Se considera a `missing` como el valor más grande para que la función
+`sort` los deje hasta el final:
+=#
 
 println(isless(1, missing)) # true
 println(isless(Inf, missing)) # true

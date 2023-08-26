@@ -2,7 +2,7 @@
 ### Por Arturo Erdely basado en https://docs.julialang.org/en/v1/
 
 ## Operadores aritméticos
-#  div  rem
+#  inv  div  rem
 
 2 + 3
 2 - 3
@@ -10,6 +10,8 @@
 2 / 3
 2 \ 3 
 2 ^ 3
+inv(3) # 1/3
+inv(4//9)
 sqrt(2)
 √2 # \sqrt + TAB 
 cbrt(27)
@@ -104,13 +106,14 @@ x ⋅ y  #  \cdot + tecla TAB
 
 
 ## Comparaciones numéricas
-
-## ==  (igualdad)
-## !=  o bien  ≠ (\ne + TAB)
-## <   
-## <=  o bien  ≤  (\le + TAB)
-## >   
-## >=  o bien  ≥  (\ge + TAB)
+#= 
+==  (igualdad)
+!=  o bien  ≠ (\ne + TAB)
+<   
+<=  o bien  ≤  (\le + TAB)
+>   
+>=  o bien  ≥  (\ge + TAB)
+=#
 
 3 == 3
 3 == 4
@@ -128,12 +131,22 @@ println(typeof(NaN), "\t", sizeof(NaN))
 x = [1, 2, 3]
 println(2 .≤ x)
 
+# sign  cmp 
 
-# isequal(x, y)  debiera ser isequiv porque funciona como ≡
-# isfinite(x)  isinf(x)
-# isnan(x)
-# iseven  isodd  isapprox
-# hash
+sign(4)
+sign(-3)
+sign(0)
+cmp(2,3)
+cmp(3,2)
+cmp(3,3)
+
+#=
+isequal(x, y)  debiera ser isequiv porque funciona como ≡
+isfinite(x)  isinf(x)
+isnan(x)
+iseven  isodd  isapprox
+hash
+=#
 
 function isque(x, y)
     println("isequal ", x, " ", y, "\t", isequal(x, y))
@@ -198,13 +211,13 @@ println(xri, "\t", typeof(xri))
 x = -3.1
 println(x, "\t", floor(x), "\t", ceil(x), "\t", trunc(x))
 
-# div  fld  cld  rem  mod  mod2pi  divrem  fldmod  gcd  lcd
 
-# abs  abs2  sign  signbit  copysign  flipsign
-
-# sqrt √   cbrt ∛   hypot  exp  log  exponent
-
-# sin cos tan sinh atan etc.  sinpi  cospi  sind  etc.
+#=
+div  fld  cld  rem  mod  mod2pi  divrem  fldmod  gcd  lcd  clamp  binomial
+abs  abs2  sign  signbit  copysign  flipsign  digits  ndigits
+sqrt √   cbrt ∛   hypot  exp  log  exponent  modf  evalpoly
+sin cos tan sinh atan etc.  sinpi  cospi  sind  etc.
+=#
 
 
 ## Funciones especiales
@@ -212,11 +225,12 @@ println(x, "\t", floor(x), "\t", ceil(x), "\t", trunc(x))
 # --> instalar paquete SpecialFunctions.jl
 
 
-## Conjuntos
-# ∩  intersect  intersect!  ∪  union  union!  length  isempty
-# setdiff  setdiff! # symdiff  symdiff!  issetequal
-# ∈  in  ∉  ⊆  issubset  isdisjoint
-# ⊊  ⊈  push!  append!  Set 
+#= Conjuntos
+∩  intersect  intersect!  ∪  union  union!  length  isempty
+setdiff  setdiff! # symdiff  symdiff!  issetequal
+∈  in  ∉  ⊆  issubset  isdisjoint
+⊊  ⊈  push!  append!  Set 
+=#
 
 A = [1, 2, 3, 4]
 B = [3, 4, 5, 6]

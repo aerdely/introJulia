@@ -3,7 +3,7 @@
 
 
 ## Caracteres
-# Int  Char  isvalid
+#  Int  Char  isvalid  isletter  isuppercase  islowercase  isnumeric
 
 println('@', "\t typeof: ", typeof('@'), "\t Int value: ", Int('@'))
 println("Char(64) = ", Char(64))
@@ -13,6 +13,19 @@ println(Char.(0:2048))
 
 println(2000, "\t\t isvalid: ", isvalid(Char, 2000), "\t", Char(2000))
 println(1000_000_000, "\t isvalid: ", isvalid(Char, 1000_000_000))
+
+isletter('A')
+isletter('z')
+isletter('9')
+isletter('@')
+
+islowercase('T')
+islowercase('t')
+isuppercase('T')
+isuppercase('t')
+
+isnumeric('9')
+isnumeric('w')
 
 
 # \n (new line)  \t (tab)  \v (vertical tab)  \b (backspace)  \r (return)  chomp
@@ -38,7 +51,8 @@ println('A' .+ [0, 1, 2, 3, 4])
 
 
 ## Subcadenas de caracteres
-# firstindex  lastindex  SubString  end  chop  strip  lstrip  rstrip
+#  firstindex  lastindex  SubString  end  chop  chomp  chopprefix  chopsuffix  
+#  strip  lstrip  rstrip
 
 texto₁ = "A quien madruga Dios lo arruga"
 println(texto₁)
@@ -82,7 +96,7 @@ print("INICIO"); print(rstrip("     texto 123 ")); println("FIN")
 
 
 ## Unicode y UTF-8
-# nextind   prevind   eachindex   transcode
+#  nextind   prevind   eachindex   transcode
 
 println(sizeof.(['∀', 'x', '∃', 'y']))
 println(sizeof.(["∀", "x", "∃", "y"]))
@@ -145,7 +159,7 @@ println("Tengo \$1,000 pesos en mi cartera")
 
 
 ## Operaciones comunes
-# findfirst  findlast  findnext  findprev  occursin
+#  findfirst  findlast  findnext  findprev  occursin
 
 println("abc" < "xyz", "\t", "abc" == "xyz")
 println("abc" < "ayz", "\t", "ayc" < "abz")

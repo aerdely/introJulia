@@ -2,7 +2,7 @@
 ### Por Arturo Erdely basado en https://docs.julialang.org/en/v1/
 
 ## Conversión
-#  typeof  convert  parse
+#  typeof  convert  parse  oftype  rationalize
 
 function t(tipo)
     if isa(tipo, DataType)
@@ -66,6 +66,14 @@ y = convert(Rational{Int64}, xBF)
 q(y)
 q(y - x)
 println(x == y, "\t", x ≡ y)
+
+x = 4; y = 3.0;
+oftype(x, y)
+oftype(y, x)
+
+convert(Rational, 5.6)
+rationalize(5.6)
+28/5
 
 
 ## Promoción

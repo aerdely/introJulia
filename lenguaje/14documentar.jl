@@ -1,15 +1,17 @@
 ### Documentar objetos
 ### Por Arturo Erdely basado en https://docs.julialang.org/en/v1/
 
-# Ejemplos: una vez definido cada objeto documentado busca ayuda
-# sobre ellos en la terminal de Julia entrando al modo ayuda:
+#=
+Una vez definido cada objeto documentado busca ayuda
+sobre ellos en la terminal de Julia entrando al modo ayuda:
 
-# julia> ?
-# help?> función_ociosa
+julia> ?
+help?> función_ociosa
 
-# o bien directamente mediante:
+o bien directamente mediante:
 
-# julia> @doc función_ociosa
+julia> @doc función_ociosa
+=#
 
 """
     función_ociosa(x, nombre::String)

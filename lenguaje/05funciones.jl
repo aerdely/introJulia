@@ -74,7 +74,7 @@ println("Int8 mín: ", typemin(Int8), "\t máx: ", typemax(Int8))
 println(f(127, 2), "\t typeof: ", typeof(f(127, 2))) # InexactError
 println(f(2.1, 3.6), "\t typeof: ", typeof(f(2.1, 3.6))) # InexactError
 
-# return  nothing
+# return  nothing  isnothing  Base.notnothing  something 
 function f(x, y)
     z = x + y
     println(z)
@@ -83,6 +83,10 @@ end
 w = f(2, 3)
 typeof(w)
 println(w)
+isnothing(w)
+Base.notnothing(5)
+Base.notnothing(w)
+something(nothing, nothing, 3, nothing, Inf)
 
 
 ## Los operadores son funciones
@@ -238,6 +242,14 @@ baz(a, b) = a + b
 args = [1, 2]
 que(baz(args...))
 
+# tuple  ntuple
+
+tuple(1, π, 'a')
+tuple([], [1,2,3])
+
+fun(x) = x^2 + 1
+ntuple(fun, 5)
+
 
 ## Argumentos opcionales
 
@@ -380,29 +392,33 @@ println(y) # Funcionó porque los arreglos son mutables
 
 ## Definir operadores binarios
 
-# Si A es un conjunto, un operador binario cerrado ⊕ en A es
-# una función ⊕: A × A → A y se tiene la estructura algebraica (A,⊕)
-# En Julia, como en cualquier otro lenguaje de programación, 
-# se tienen predefinidos diversos operadores binarios sobre los
-# distintos conjuntos (tipos) de números. Por ejemplo (Z,+) es
-# el conjunto de los números enteros Z con la forma usual de
-# de definir suma * de los mismos:
+#=
+Si A es un conjunto, un operador binario cerrado ⊕ en A es
+una función ⊕: A × A → A y se tiene la estructura algebraica (A,⊕)
+En Julia, como en cualquier otro lenguaje de programación, 
+se tienen predefinidos diversos operadores binarios sobre los
+distintos conjuntos (tipos) de números. Por ejemplo (Z,+) es
+el conjunto de los números enteros Z con la forma usual de
+de definir suma * de los mismos:
+=#
 
 +(2, 3) 
 # o bien:
 2 + 3 
 
-# Además de los operadores binarios predefinidos en Julia podemos
-# definir nuevos, utilizando símbolos del siguiente catálogo:
+#=
+Además de los operadores binarios predefinidos en Julia podemos
+definir nuevos, utilizando símbolos del siguiente catálogo:
 
-# Con la misma precedencia que la suma usual +
-# ⊕ ⊖ ⊞ ⊟ ∪ ∨ ⊔ ± ∓ ∔ ∸ ≏ ⊎ ⊻ ⊽ ⋎ ⋓ ⧺ ⧻ ⨈ ⨢ ⨣ ⨤ ⨥ ⨦ ⨧ ⨨ 
-# ⨩ ⨪ ⨫ ⨬ ⨭ ⨮ ⨹ ⨺ ⩁ ⩂ ⩅ ⩊ ⩌ ⩏ ⩐ ⩒ ⩔ ⩖ ⩗ ⩛ ⩝ ⩡ ⩢ ⩣
+Con la misma precedencia que la suma usual +
+⊕ ⊖ ⊞ ⊟ ∪ ∨ ⊔ ± ∓ ∔ ∸ ≏ ⊎ ⊻ ⊽ ⋎ ⋓ ⧺ ⧻ ⨈ ⨢ ⨣ ⨤ ⨥ ⨦ ⨧ ⨨ 
+⨩ ⨪ ⨫ ⨬ ⨭ ⨮ ⨹ ⨺ ⩁ ⩂ ⩅ ⩊ ⩌ ⩏ ⩐ ⩒ ⩔ ⩖ ⩗ ⩛ ⩝ ⩡ ⩢ ⩣
 
-# Con la misma precedencia que la multiplicación usual *
-# % × ∩ ∧ ⊗ ⊘ ⊙ ⊚ ⊛ ⊠ ⊡ ⊓ ∗ · ∤ ⅋ ≀ ⊼ ⋄ ⋆ ⋇ ⋉ ⋊ ⋋ ⋌ ⋏ ⋒ ⟑ 
-# ⦸ ⦼ ⦾ ⦿ ⧶ ⧷ ⨇ ⨰ ⨱ ⨲ ⨳ ⨴ ⨵ ⨶ ⨷ ⨸ ⨻ ⨼ ⨽ ⩀ ⩃ ⩄ ⩋ ⩍ ⩎ 
-# ⩑ ⩓ ⩕ ⩘ ⩚ ⩜ ⩞ ⩟ ⩠ ⫛ ⊍ ▷ ⨝ ⟕ ⟖ ⟗
+Con la misma precedencia que la multiplicación usual *
+% × ∩ ∧ ⊗ ⊘ ⊙ ⊚ ⊛ ⊠ ⊡ ⊓ ∗ · ∤ ⅋ ≀ ⊼ ⋄ ⋆ ⋇ ⋉ ⋊ ⋋ ⋌ ⋏ ⋒ ⟑ 
+⦸ ⦼ ⦾ ⦿ ⧶ ⧷ ⨇ ⨰ ⨱ ⨲ ⨳ ⨴ ⨵ ⨶ ⨷ ⨸ ⨻ ⨼ ⨽ ⩀ ⩃ ⩄ ⩋ ⩍ ⩎ 
+⩑ ⩓ ⩕ ⩘ ⩚ ⩜ ⩞ ⩟ ⩠ ⫛ ⊍ ▷ ⨝ ⟕ ⟖ ⟗
+=#
 
 ⊕(x, y) = x + y + 100
 ⊕(1, 2)

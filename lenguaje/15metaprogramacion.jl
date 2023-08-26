@@ -49,7 +49,7 @@ dump(tupla)
 
 
 ## Expresiones y evaluación
-#  Expr   quote   eval
+#  Expr   quote   eval  evalfile 
 
 ex = :(a + b*c + 1)
 que(ex)
@@ -179,9 +179,10 @@ println(código)
 eval(Meta.parse(código))
 conocer("Arturo", 53)
 
+#=
+My first macro in Julia 
+https://giordano.github.io/blog/2022-06-18-first-macro/ 
 
-## My first macro in Julia 
-#  https://giordano.github.io/blog/2022-06-18-first-macro/ 
-
-## Metaprogramming in Julia: A Full Overview
-#  Fuente: https://towardsdatascience.com/metaprogramming-in-julia-a-full-overview-2b4e811f1f77
+Metaprogramming in Julia: A Full Overview
+Fuente: https://towardsdatascience.com/metaprogramming-in-julia-a-full-overview-2b4e811f1f77
+=#

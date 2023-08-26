@@ -25,6 +25,7 @@ ND = Array{Int}(undef, 2, 3, 4)
 que(ND)
 println(ND)
 dump(ND)
+summary(ND)
 display(ND)
 
 CEROint64 = zeros(Int64, (2, 3, 4))
@@ -72,7 +73,7 @@ isa(M, Matrix)
 isa(M, Vector)
 
 
-# reshape  copy  similar  transpose  vec
+# reshape  copy  similar  transpose  vec  circshift
 
 A = zeros(Int, (3, 4))
 que(A)
@@ -95,6 +96,13 @@ que(C)
 que(tA)
 que(R)
 que(Rvec)
+
+W = reshape(Vector(1:16), (4,4))
+circshift(W, (0,2))
+circshift(W, (1,2))
+display(W)
+circshift(W, (-1,0))
+
 
 # rand  randn  range  fill  fill!
 
@@ -138,7 +146,7 @@ println(strides(B))
 
 
 ## Concatenación
-## cat  vcat  hcat  hvcat
+#  cat  vcat  hcat  hvcat  stack
 
 que([1 2 3])
 que([1, 2, 3])
@@ -154,6 +162,10 @@ hcat(A, B)
 [A B]
 [A, B]
 [A B; B A]
+
+vecs = (1:2, [30, 40], Float32[500, 600])
+mat = stack(vecs)
+stack(c -> (c, c-32), "julia")
 
 
 ## Arreglos de elementos con distintos tipos
@@ -216,7 +228,7 @@ display(A)
 
 
 # push!   pop!   pushfirst!  append!  prepend!  popfirst!   sort   sort!  
-# deleteat!  popat!  splice!  insert!  replace
+# deleteat!  keepat!  popat!  splice!  insert!  replace
 
 fib = [1, 1, 2, 3, 5, 8, 13]
 push!(fib, 21)
@@ -248,6 +260,10 @@ deleteat!([6,5,4,3,2,1], 3:5)
 deleteat!([6,5,4,3,2,1], [1, 3])
 deleteat!([6,5,4,3,2,1], (1, 3))
 deleteat!([6,5,4,3,2,1], [true, true, false, true, false, false])
+
+keepat!([6,5,4,3,2,1], 2:4)
+keepat!([6,5,4,3,2,1], [1,3,4])
+keepat!([6,5,4,3,2,1], [true, true, false, true, false, false])
 
 a = [4, 3, 2, 1]
 popat!(a, 2)
@@ -416,9 +432,11 @@ broadcast(k, sec) # es lo mismo que f.(sec)
 map(k, sec) # hace lo mismo que broadcast, pero... (ver más abajo)
 foreach(k, sec) # ejecuta la acción pero no conserva los valores f(n)
 
-# Si `sec` es un objeto iterable broadcast(f, sec) o bien f.(sec) primero
-# aplican collect(sec) antes de aplicar la función f, mientras map no y puede
-# resultar un poco más rápido.
+#=
+Si `sec` es un objeto iterable broadcast(f, sec) o bien f.(sec) primero
+aplican collect(sec) antes de aplicar la función f, mientras map no y puede
+resultar un poco más rápido.
+=#
 
 using BenchmarkTools
 sec = 1:1_000_000
@@ -426,8 +444,10 @@ sec = 1:1_000_000
 @btime b = broadcast(k, sec);
 @btime m = map(k, sec);
 
-# En cambio si `sec` es un arreglo entonces broadcast o f.(sec) es un poco
-# rápido que map:
+#=
+En cambio si `sec` es un arreglo entonces broadcast o f.(sec)
+es un poco más rápido que map:
+=#
 
 sec = collect(1:1_000_000)
 @btime v = f.(sec);

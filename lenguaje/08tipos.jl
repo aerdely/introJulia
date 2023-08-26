@@ -2,7 +2,7 @@
 ### Por Arturo Erdely basado en https://docs.julialang.org/en/v1/
 
 ## Declaración de tipo
-## typeof  a::b  typeassert
+## typeof  a::b  typeassert  summary
 
 entero = 3
 println(typeof(entero))
@@ -10,9 +10,11 @@ println(entero::Int)
 println(typeassert(entero, Int))
 println(entero::Int32) # TypeError
 println(typeassert(entero, Int32)) # TypeError
+summary(entero) # descripción como texto
 
 x::Int8 = 100 
 typeof(x)
+summary(x)
 
 function f()
     x::Int8 = 100
@@ -20,6 +22,7 @@ function f()
 end
 z = f()
 println(z, "\t", typeof(z))
+summary(z)
 
 # Incertidumbre sobre el tipo que arrojará la función
 # Esto disminuye eficiencia de la compilación
@@ -79,7 +82,7 @@ using BenchmarkTools
 
 
 ## Tipos abstractos --> ver: https://github.com/aerdely/introJulia/blob/main/lenguaje/complementos/ArbolTipos.png
-##  <:  supertype   subtypes
+##  <:  supertype   subtypes  isabstracttype  isconcretetype  nameof
 
 println(Real <: Number)
 println(AbstractFloat <: Real)
@@ -102,6 +105,17 @@ println(supertype(otronum))
 println(supertypes(otronum))
 println(subtypes(otronum))
 
+isabstracttype(otronum)
+isconcretetype(otronum)
+isabstracttype(Number)
+isabstracttype(Float64)
+isconcretetype(Float64)
+
+otronum
+typeof(otronum)
+nameof(otronum)
+typeof(nameof(otronum))
+
 todossubtipos = subtypes(Any)
 println(todossubtipos)
 println(typeof(todossubtipos))
@@ -116,7 +130,8 @@ println(otro ∈ todossubtipos)
 
 
 ## Tipos compuestos inmutables
-## struct  fieldnames  propertynames  getproperty 
+## struct  nfields  fieldtypes fieldnames  propertynames  getfield  getproperty
+## hasfield  hasproperty isimmutable  ismutable  ismutabletype  isstructtype
 
 struct Paciente
     nombre::String
@@ -130,17 +145,51 @@ end
 println(Paciente, "\t", typeof(Paciente))
 println(supertype(Paciente))
 println(subtypes(Paciente))
+nfields(Paciente)
+fieldtypes(Paciente)
+fieldnames(Paciente)
+propertynames(Paciente) # información interna del struct 
 
 ficha = Paciente("Pedro", 'M', true, 47, 85.5, 1.72, 666)
-println(fieldnames(Paciente), "\t", typeof(fieldnames(Paciente)))
-println(propertynames(Paciente)) # información interna del objeto 
 println(ficha, "\n", typeof(ficha))
 fieldnames(ficha) # ERROR
 propertynames(ficha) # igual que `fieldnames(typeof(ficha))`
+
 println(ficha.peso)
+getfield(ficha, :peso) # igual que `ficha.peso`
 getproperty(ficha, :peso) # igual que `ficha.peso`
+
 display(ficha)
+fieldnames(Paciente)
+hasfield(Paciente, :peso)
+hasfield(Paciente, :masa)
+
+propertynames(ficha)
+hasproperty(ficha, :sexo)
+hasproperty(ficha, :masa)
+
 ficha.peso = Float16(91.3) # ERROR porque `struct` genera objetos inmutables
+ismutable(ficha)
+isimmutable(ficha)
+ismutabletype(Paciente)
+
+a = 5
+ismutable(a)
+aa = [5, 6]
+ismutable(aa)
+ismutabletype(Float64)
+ismutabletype(Array)
+
+isstructtype(Paciente)
+isstructtype(Float64)
+isstructtype(Rational)
+fieldnames(Rational)
+fieldtypes(Rational)
+r = 4//9
+r.num
+r.den
+numerator(r)
+denominator(r)
 
 # Pero los elementos de un objeto inmutable pudieran ser mutables
 struct cosita
@@ -159,7 +208,7 @@ println(nadita, "\t", typeof(nadita))
 
 
 ## Tipos compuestos mutables
-## setproperty!
+## setfield!  setproperty!
 
 mutable struct Paciente2
     nombre::String
@@ -170,6 +219,7 @@ mutable struct Paciente2
     estatura::Float16
     observaciones # cualquier tipo, es decir osbervaciones::Any
 end
+ismutabletype(Paciente2)
 println(Paciente2, "\t", typeof(Paciente2))
 
 ficha2 = Paciente2("Pedro", 'M', true, 47, 85.5, 1.72, "perro maldito")
@@ -178,10 +228,17 @@ println(ficha2, "\n", typeof(ficha2))
 println(ficha2.peso)
 ficha2.peso = 91.3 # mutable struct sí es modificable (mutable)
 println(ficha2, "\n", typeof(ficha))
+
+getfield(ficha2, :peso)
+setfield!(ficha2, :peso, 88.8) # ERROR
+setfield!(ficha2, :peso, Float16(88.8)) 
+ficha2
+
 getproperty(ficha2, :peso) # igual que `ficha2.peso`
 setproperty!(ficha2, :peso, 99.9) # igual que `ficha2.peso = 99.9`
 getproperty(ficha2, :peso)
-println(ficha2.peso)
+ficha2
+
 
 ## Tipos compuestos parcialmente mutables
 
@@ -189,6 +246,7 @@ mutable struct Parcial
     a::Int64 # mutable 
     const b::Float64 # inmutable por haber sido declarado como constante
 end
+ismutabletype(Parcial)
 p = Parcial(5, 2.3)
 p.a = 99
 println(p)

@@ -9,7 +9,7 @@ end
 
 
 ## Iteración
-## iterate  Base.iterate  zip  enumerate  collect  eachsplit
+#  iterate  Base.iterate  zip  enumerate  collect  eachsplit  
 
 arreglo = ['a', 'W', '@']
 q(iterate(arreglo))
@@ -65,6 +65,47 @@ split(himno, '.')
 iterador = eachsplit(himno, '.')
 collect(iterador)
 
+#  Iterators.countfrom  Iterators.take  Iterators.takewhile
+#  Iterators.drop  Iterators.dropwhile  Iterators.cycle
+#  Iterators.repeated  Iterators.product  Iterators.partition  Iterators.reverse
+
+iter = Iterators.countfrom(-3, 10)
+for i ∈ iter
+    i > 50 && break
+    println(i)
+end
+
+Iterators.take(iter, 4)
+collect(Iterators.take(iter, 4))
+
+itercond(x) = x < 51
+collect(Iterators.takewhile(itercond, iter))
+# o bien:
+collect(Iterators.takewhile(<(51), iter)) # es decir, mediante función anónima
+
+collect(1:3:20)
+collect(Iterators.drop(1:3:20, 4))
+collect(Iterators.dropwhile(<(10), 1:3:20))
+
+for (i, t) ∈ enumerate(Iterators.cycle("Julia"))
+    print(t)
+    i > 11 && break 
+end
+
+collect(Iterators.repeated([1,2], 5))
+
+iterpro = Iterators.product(1:3, 'a':'e')
+collect(iterpro)
+# que es lo mismo que:
+[(x,y) for x ∈ 1:3, y ∈ 'a':'e']
+
+collect(Iterators.partition([1,2,3,4,5], 2))
+collect(Iterators.partition(1:5, 2))
+collect.(collect(Iterators.partition(1:5, 2)))
+collect(Iterators.partition("Mexicanos", 4))
+
+collect(Iterators.reverse(1:5))
+
 
 # Ejemplo importante porque se usa mucho más adelante:
 
@@ -115,7 +156,7 @@ println(sum(i^2 for i ∈ 1:1803))
 
 
 ## Indexación
-## getindex  firstindex  lastindex  setindex!
+#  getindex  firstindex  lastindex  setindex!
 
 arreglo = ['a', 'W', '@']
 println(arreglo[2])
@@ -145,12 +186,14 @@ println(Cuadrados(10)[end])
 
 
 ## Información / transformación de colecciones iterables
-#  eltype  indexin  unique  unique!  allunique
-#  reduce  foldl  foldr  mapreduce  mapfoldl  mapfoldr  accumulate  accumulate!
-#  cumsum  cumsum!  cumprod  cumprod! 
-#  maximum  minimum  extrema argmax  argmin  findmax  findmin  findall
-#  sum  prod  any  all  count  first  last  collect
-#  filter  filter!  mapslice
+#=
+eltype  indexin  unique  unique!  allunique  allequal
+reduce  foldl  foldr  mapreduce  mapfoldl  mapfoldr  accumulate  accumulate!
+cumsum  cumsum!  cumprod  cumprod! 
+maximum  minimum  extrema argmax  argmin  findmax  findmin  findall
+sum  prod  any  all  count  first  last  collect
+filter  filter!  mapslice
+=#
 
 eltype([1, 2, 3])
 eltype(["Hola", "perros", "malditos"])
@@ -193,9 +236,18 @@ accumulate(+, [1, 2, 3, 4]) # igual que `cumsum([1, 2, 3, 4])`
 accumulate(*, [1, 2, 3, 4]) # igual que `cumprod([1, 2, 3, 4])`
 accumulate(*, 'a':'e')
 
-# mapreduce(f, op, itrs...; [init]) es equivalente a:
-# reduce(op, map(f, itr); init=init) pero más rápido
-# y lo análogo con `mapfoldl` y `mapfoldr`
+AA = rand(1:9, 4, 4)
+accumulate(+, AA, dims=1)
+display(AA)
+accumulate(+, AA, dims=2)
+display(AA)
+accumulate(+, accumulate(+, AA, dims=1), dims=2)
+
+#=
+mapreduce(f, op, itrs...; [init]) es equivalente a:
+reduce(op, map(f, itr); init=init) pero más rápido
+y lo análogo con `mapfoldl` y `mapfoldr`
+=#
 
 X = [-3, -2, -1, 0, 1, 2]
 maximum(X)
@@ -305,7 +357,7 @@ A == B
 
 
 ## Diccionarios
-#  Dict  keys  values  get  get!  delete  merge
+#  Dict  keys  values  haskey  get  get!  delete  merge  IdDict
 
 D = Dict(1 => "a", 2 => "b", 3 => "a")
 D[2]
@@ -313,6 +365,8 @@ keys(D)
 collect(keys(D))
 values(D)
 collect(values(D))
+haskey(D, 2)
+haskey(D, 4)
 
 Dvector = [("Alicia", 10), ("Bertha", 8), ("Cecilia", 10)]
 calif = Dict(Dvector)
@@ -370,9 +424,15 @@ D2 = Dict(['c', 'd'] .=> [30, 40])
 merge(D1, D2)
 merge(D2, D1)
 
+# IdDict
+
+Dict(true => "sí", 1 => "no", 1.0 => "quizás") # simplifica tipos
+IdDict(true => "sí", 1 => "no", 1.0 => "quizás") # respeta tipos
+
+
 
 ## Ordenamiento y funciones relacionadas 
-#  sort  sort!  sortperm  issorted  reverse
+#  sort  sort!  sortperm  invperm  issorted  reverse
 
 A = [2, 3, 1]
 sort(A)
@@ -385,6 +445,9 @@ v = randn(5)
 p = sortperm(v)
 v[p]
 v[p] == sort(v)
+ip = invperm(p)
+v[p][ip]
+v[p][ip] == v
 
 f(x) = x^2
 v

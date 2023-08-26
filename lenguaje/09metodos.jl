@@ -2,7 +2,7 @@
 ### Por Arturo Erdely basado en https://docs.julialang.org/en/v1/
 
 ##  Métodos
-#   methods
+#   methods  which
 
 f(x::Float64, y::Float64) = 2x + y
 println(f, "\t", typeof(f))
@@ -28,6 +28,11 @@ println(f(2.0, 3)) # Método 2
 println(f(2.0, 'a')) # TypeError
 println(f(2.0, 3), "\t", f(2, 3), "\t", f(true, true))
 println(typeof.((f(2.0, 3), f(2, 3), f(true, true))))
+
+which(f, (Float64, Float64))
+which(f, (Number, Number))
+which(f, (Int, Float64))
+which(f, (Any, Any)) # ERROR: no unique matching method found for the specified argument types
 
 println(methods(+))
 
