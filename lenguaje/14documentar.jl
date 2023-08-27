@@ -11,6 +11,11 @@ help?> función_ociosa
 o bien directamente mediante:
 
 julia> @doc función_ociosa
+
+o bien:
+
+julia> Docs.doc(función_ociosa)
+
 =#
 
 """
@@ -41,6 +46,8 @@ function función_ociosa(x, nombre::String)
 end
 
 @doc función_ociosa
+
+Docs.doc(función_ociosa)
 
 función_ociosa(3, "Arturo")
 

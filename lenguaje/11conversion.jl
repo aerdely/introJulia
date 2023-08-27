@@ -2,7 +2,7 @@
 ### Por Arturo Erdely basado en https://docs.julialang.org/en/v1/
 
 ## Conversión
-#  typeof  convert  parse  oftype  rationalize
+#  typeof  convert  parse  tryparse  oftype  rationalize
 
 function t(tipo)
     if isa(tipo, DataType)
@@ -42,6 +42,12 @@ display(A_F)
 y = convert(Int64, "1234") # ERROR
 y = parse(Int64, "1234")
 q(y)
+
+yy = parse(Int64, "abcd") # ERROR
+q(yy)
+yy = tryparse(Int64, "abcd") # igual que `parse` pero sin arrojar error
+q(yy)
+tryparse(Int64, "1234")
 
 x = √2
 q(x)

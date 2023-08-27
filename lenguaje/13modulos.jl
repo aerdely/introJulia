@@ -123,6 +123,8 @@ que significa que el módulo `CosasChidas` quedó de hecho como submódulo de `M
 parentmodule(CosasChidas)
 varinfo()
 names(CosasChidas) # solo nombres de lo que exporta el módulo
+varinfo(CosasChidas) # info solo de los objetos que se exporta
+varinfo(CosasChidas, all = true) #  info de todos los objetos definidos en el módulo 
 
 # El módulo ya fue creado pero lo que exporta todavía no está disponible:
 
@@ -466,6 +468,11 @@ prin2(x) = Sub2.print(x)
 
 end # SuperModulo 
 ######
+
+varinfo(SuperModulo)
+varinfo(SuperModulo, all = true)
+varinfo(SuperModulo, imported = true) # objetos exportados e importados
+varinfo(SuperModulo, all = true, imported = true) # todos los objetos, hasta importados
 
 #=
 En este momento podemos acceder a objetos de los submódulos con el 
