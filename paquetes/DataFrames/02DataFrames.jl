@@ -1,4 +1,4 @@
-### 2. El tipo `DataFrame` y constructores
+### 2. El tipo `DataFrame`, constructores y filtrado
 ### Por Dr. Arturo Erdely con base en https://dataframes.juliadata.org/stable/ 
 
 # Requiere haber instalado previamente los paquetes 
@@ -93,7 +93,11 @@ df # nótese el type `String?` donde `?` es por el `missing`
 subset(df, :Cabello => x -> x .== "rubio") # ERROR por culpa de `missing`
 subset(df, :Cabello => x -> x .== "rubio", skipmissing = true)
 
-# `filter`` es más rápido que `subset`
+#=
+`filter`` es más rápido que `subset` pero `subset` mantiene compatibilidad
+y consistencia con otras funciones del paquete `DataFrames` con las que
+`filter` pudiera no ser del todo compatible o funcional.
+=#
 
 n = 10_000
 t = DataFrame(continuo = rand(n), discreto = rand([1,2,3], n), letra = rand('A':'Z', n))
