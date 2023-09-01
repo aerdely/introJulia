@@ -131,9 +131,9 @@ que(B)
 # eltype  typeof  length  ndims  size  sizeof  Base.summarysize
 # axes  eachindex  strides
 
-A = zeros(Int, 2, 3)
+A = zeros(Int, 3, 5)
 println(typeof(A), "\t", eltype(A))
-println(length(A), "\t", ndims(A), "\t", size(A))
+println(length(A), "\t", ndims(A), "\t", size(A), "\t", "$(size(A,1))×$(size(A,2))")
 println(sizeof(A), "\t", Base.summarysize(A))
 println(axes(A), "\t", axes(A, 2))
 @doc Base.OneTo
