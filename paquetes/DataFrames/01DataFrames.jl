@@ -1,4 +1,4 @@
-### 1. Primeros pasos con DataFrames
+### 1. Introducción a DataFrames
 ### Por Dr. Arturo Erdely con base en https://dataframes.juliadata.org/stable/man/basics/ 
 
 # Requiere haber instalado previamente los paquetes 
@@ -241,19 +241,21 @@ mat2, head2 = readdlm(IOBuffer(csv2), ',', header = true)
 df2 = DataFrame(mat2, vec(head2))
 identity.(df2)
 
-# ¿Cuál es la ventaja de utilizar `DelimitedFiles` en lugar de `CSV.jl`?
-# La primera es que `DelimitedFiles` es parte de la biblioteca estándar
-# de Julia y por lo tanto no requiere instalación previa. La segunda es que
-# para archivos de datos pequeños será mucho más rápido en la primera ejecución
-# que en la primera compilación del paquete `CSV.jl` que toma varios segundos.
+#=
+¿Cuáles son la ventajas de utilizar `DelimitedFiles` en lugar de `CSV.jl`?
+1) `DelimitedFiles` es parte de la biblioteca estándar de Julia y por lo tanto
+   no requiere instalación previa.
+2) Para archivos de datos pequeños será mucho más rápido en la primera ejecución
+   que en la primera compilación del paquete `CSV.jl` que toma varios segundos.
 
-# ¿Cuáles son las desventajas? Para archivos de datos muy grandes la función
-# `readdlm` será más lenta. Adicionalmente, carece de diversas opciones.
-# `DelimitedFiles` es más eficiente para leer datos del mismo tipo, pero
-# si las columnas tienen distintos tipos de dato es menos eficiente.
-# Similarmente, por ejemplo, ante datos faltantes en el archivo CSV
-# tendrás que identificarlos manualmente después de leerlos con la
-# función `readdlm`.
+¿Cuáles son las desventajas? 
+1) Para archivos de datos muy grandes la función `readdlm` será más lenta.
+2) Carece de diversas opciones.
+3) `DelimitedFiles` es más eficiente para leer datos del mismo tipo, pero
+   si las columnas tienen distintos tipos de dato es menos eficiente.
+4) Ante datos faltantes en el archivo CSV tendrás que identificarlos manualmente
+   después de leerlos con la función `readdlm`.
+=#
 
 ## DataFrames + DelimitedFiles (sin usar CSV)
 #  Fuente: https://bkamins.github.io/julialang/2022/02/04/delimitedfiles.html 

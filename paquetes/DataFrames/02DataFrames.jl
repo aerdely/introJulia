@@ -68,7 +68,7 @@ df = DataFrame(v)
 
 
 ## Manipulación de DataFrames (funciones adicionales a 01DataFrames.jl)
-#  subset  subset!  replace!  allowmissing!
+#  subset  subset!  allowmissing!  filter 
 
 begin
     df = DataFrame()
@@ -92,6 +92,19 @@ df.Cabello = ["negro", "café", "rubio", missing, "rubio"]
 df # nótese el type `String?` donde `?` es por el `missing`
 subset(df, :Cabello => x -> x .== "rubio") # ERROR por culpa de `missing`
 subset(df, :Cabello => x -> x .== "rubio", skipmissing = true)
+
+# `filter`` es más rápido que `subset`
+
+n = 10_000
+t = DataFrame(continuo = rand(n), discreto = rand([1,2,3], n), letra = rand('A':'Z', n))
+t1 = subset(t, :continuo => x -> x .> 0.5, :discreto => x -> x .== 2)
+all(t1.continuo .> 0.5 .&& t1.discreto .== 2) # comprobando
+t2 = filter([:continuo, :discreto] => (x,y) -> x .> 0.5 .&& y .== 2, t)
+all(t2.continuo .> 0.5 .&& t2.discreto .== 2) # comprobando
+t1 == t2 # dataframes iguales
+t1 === t2 # pero distinta ubicación de memoria
+@btime subset(t, :continuo => x -> x .> 0.5, :discreto => x -> x .== 2);
+@btime filter([:continuo, :discreto] => (x,y) -> x .> 0.5 .&& y .== 2, t);
 
 
 ## Reemplazar datos en un DataFrame
@@ -138,7 +151,7 @@ alumnos
 examen
 crossjoin(alumnos, examen, makeunique = true)
 
-# si la columna pivote se llama diferente den ls DataFrames
+# si la columna pivote se llama diferente en los DataFrames
 alumnos = DataFrame(ID = [3001, 3002, 3003, 3004], Nombre = ["Arias", "Benítez", "Calderón", "Díaz"])
 examen = DataFrame(Cuenta = [3001, 3002, 3004, 3005], Calif = [9, 10, 5, 7])
 innerjoin(alumnos, examen, on = :ID => :Cuenta)
@@ -173,6 +186,8 @@ sort(df, [:Estatura, :Peso])
 
 sort(df, [:Edad, :Peso])
 
+sort(df, [:Peso, :Edad])
+
 sort(df, [:Edad, :Peso], rev = [false, true])
 
 df
@@ -201,11 +216,11 @@ coalesce.(x, 0)
 replace(x, missing => 0)
 coalesce.(x, 0) == replace(x, missing => 0)
 
-# `replace`` versus `coalesce`
+# `replace` versus `coalesce`
 
 z = rand([1, 2, missing], 100)
 @btime coalesce.(z, 0);
-@btime replace(z, missing => 0); # Casi 4 veces más rápido
+@btime replace(z, missing => 0); # Aprox 4 veces más rápido
 
 df = DataFrame(ID = 1:5,
                X = [1, missing, 3, missing, 5],
