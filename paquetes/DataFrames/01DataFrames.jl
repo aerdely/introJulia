@@ -212,6 +212,11 @@ df = DataFrame(Nombre = ["Abigail", "Beatriz", "Caritina", "Delia"],
 CSV.write("dfEjemplo.csv", df)
 dfLeer = DataFrame(CSV.File("dfEjemplo.csv"))
 typeof(dfLeer)
+# también:
+dfLeer2 = CSV.read("dfEjemplo.csv", DataFrame)
+dfLeer == dfLeer2
+@btime dfLeer = DataFrame(CSV.File("dfEjemplo.csv"))
+@btime dfLeer2 = CSV.read("dfEjemplo.csv", DataFrame)
 rm("dfEjemplo.csv") # eliminar archivo
 
 using DelimitedFiles
