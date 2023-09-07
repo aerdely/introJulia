@@ -64,7 +64,7 @@ begin
 end
 
 
-## Paquete `Random`
+### Paquete `Random`
 
 using Random 
 
@@ -231,8 +231,111 @@ begin
 end
 
 
-## Paquete `Statistics`
-#  mean  median  middle  quantile  std  var  cov  cor
+## Muestreo probabilístico con reemplazo
+
+# generar tabla de frecuencias absolutas y relativas de la colección x
+function conteo(x) 
+    valor = unique(x) # valores distintos de x
+    try 
+        sort!(valor) # intenta ordenar valores
+    catch
+        @warn "Conjunto no ordenable" # avisa si no se pudo
+    end 
+    nv = length(valor)
+    frecuencia = zeros(Int, nv)
+    nx = length(x)
+    for i ∈ 1:nv # calcular frecuencia absoluta de los distintos valores de x
+        # frecuencia[i] = length(findall(z -> (z == valor[i]), x))
+        for j ∈ 1:nx
+            if valor[i] == x[j]
+                frecuencia[i] += 1
+            end
+        end
+    end
+    proporción = frecuencia ./ nx
+    T = Matrix{Any}(undef, nv, 3)
+    T[:, 1] = valor
+    T[:, 2] = frecuencia
+    T[:, 3] = proporción
+    return (tabla = T, cols = ("valor", "frecuencia", "proporción"))
+end
+
+# Ejemplo
+enteros = collect(1:10)
+r = rand(enteros, 10_000)
+c = conteo(r)
+c.cols
+c.tabla
+sum(c.tabla[:, 2]), sum(c.tabla[:, 3])
+
+# Ejemplo
+letras = 'A' .+ collect(0:4)
+r = rand(letras, 10_000)
+c = conteo(r)
+c.cols
+c.tabla
+sum(c.tabla[:, 2]), sum(c.tabla[:, 3])
+
+# Ejemplo
+frase = "Hola mundo"
+r = rand(frase, 100_000)
+c = conteo(r)
+c.cols
+c.tabla
+sum(c.tabla[:, 2]), sum(c.tabla[:, 3])
+
+# Ejemplo
+loquesea = [[1 2 3; 4 5 6], rand(5), "Hola amigos", x -> x^2]
+loquesea[2]
+loquesea[4]
+loquesea[4](5)
+r = rand(loquesea, 1_000)
+c = conteo(r)
+c.cols
+c.tabla
+sum(c.tabla[:, 2]), sum(c.tabla[:, 3])
+
+# cadenas aleatorias de caracteres
+r = randstring("ACGT", 10_000)
+c = conteo(r)
+c.cols
+c.tabla
+sum(c.tabla[:, 2]), sum(c.tabla[:, 3])
+
+r = randstring('a':'z', 10)
+
+
+## Muestreo probabilístico sin reemplazo
+
+# permutaciones aleatorias de números enteros positivos
+randperm(10)
+
+# permutaciones aleatorias de colecciones arbitrarias
+A = collect('A':'E')
+shuffle(A)
+A # pero el conjunto A permanece como fue definido
+shuffle!(A) # se modifica A con el resultado de shuffle
+A
+
+# muestra sin reemplazo de tamaño m a partir de n elementos (m ≤ n)
+function sinreemplazo(A::Array, m::Integer)
+    if m > length(A)
+        error("m debe ser igual o menor que el número de elementos de A")
+        return nothing
+    else
+        return shuffle(A)[1:m]
+    end
+end
+
+sinreemplazo(collect('A':'Z'), 10)
+
+sinreemplazo(collect('A':'Z'), 10.0) # error porque 10.0 es Float no Int 
+
+sinreemplazo(collect('A':'Z'), 100) # error porque m > length(A)
+
+
+### Paquete `Statistics`
+#   mean  median  middle  quantile  std  var  cov  cor
 
 using Statistics, Random
 
@@ -348,4 +451,3 @@ z = rand(100);
 M = [x y z]
 cov(M)
 cor(M)
-
