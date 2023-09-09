@@ -12,13 +12,13 @@ import Pkg; Pkg.add("Distributions")
 
 using Distributions
 
+@doc Distributions
+
 
 
 ### Introducción
 
 ## Definir un modelo de probabilidad
-
-@doc Distributions
 
 typeof(Normal)
 fieldnames(Normal)
