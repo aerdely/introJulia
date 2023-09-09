@@ -3,8 +3,15 @@
 
 #### Basado en: https://juliastats.org/Distributions.jl/stable/ 
 
+### Instalar paquete
+
+import Pkg; Pkg.add("Distributions")
+
+
+### Usar el paquete
 
 using Distributions
+
 
 
 ### Introducción

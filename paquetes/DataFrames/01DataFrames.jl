@@ -1,10 +1,22 @@
 ### 1. Introducción a DataFrames
-### Por Dr. Arturo Erdely con base en https://dataframes.juliadata.org/stable/man/basics/ 
+### Por Dr. Arturo Erdely 
 
-# Requiere haber instalado previamente los paquetes 
-# DataFrames, CSV, BenchmarkTools
+### Con base en: https://dataframes.juliadata.org/stable/man/basics/ 
+
+## Requiere haber instalado previamente los paquetes 
+## DataFrames, CSV, BenchmarkTools
+
+begin
+   import Pkg
+   Pkg.add("CSV")
+   Pkg.add("DataFrames")
+   Pkg.add("BenchmarkTools")   
+end
+
+## Usar los paquetes
 
 using CSV, DataFrames, BenchmarkTools
+
 
 
 ## Crear un DataFrame
