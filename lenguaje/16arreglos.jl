@@ -375,7 +375,16 @@ U = ones(4, 3)
 
 log.(A)
 A .+= 1
+
 A + U
+A .+ U
+using BenchmarkTools 
+@btime A + U # más rápido
+@btime A .+ U # más lento
+
+display(A)
+sum(A, dims = 1)
+sum(A, dims = 2)
 
 display(A)
 h(x) = x - 100
@@ -384,9 +393,8 @@ H(X) = X .- 100
 H(A) 
 h.(A) == H(A)
 
-using BenchmarkTools 
-@btime h.(A)
-@btime H(A)
+@btime h.(A) # más lento
+@btime H(A) # más rápido
 
 display(A)
 B = fill(1.5, size(A))
