@@ -1,6 +1,8 @@
 ### Introducción al lenguaje de programación Julia
 ### Por Arturo Erdely basado en https://docs.julialang.org/en/v1/
 
+### Versión: 1.9.3
+
 # Asignar valor numérico
 a = 5 
 
