@@ -350,6 +350,10 @@ println("con ciclo <for> puro:")
 println(sqrt.([2, 4, 16])) # es lo mismo que:
 println(broadcast(sqrt, [2, 4, 16]))
 
+v = [1, 3, 5]
+log.(v) .^ 2 .- 1/2 # es lo mismo que:
+@. log(v)^2 - 1/2
+
 
 ## Composición de funciones
 
