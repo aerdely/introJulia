@@ -60,6 +60,8 @@ que(V)
 isa(V, Array)
 isa(V, Vector)
 
+collect((1, 2, 3)) # convertir tupla en vector
+
 # Matrix
 
 Matrix
