@@ -57,6 +57,7 @@ objeto en el módulo actual `Main`
 parentmodule(sum)
 isdefined(Base, :sum)
 isdefined(Main, :sum)
+isdefined(Core, :sum)
 
 @isdefined suma 
 
