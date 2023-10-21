@@ -113,7 +113,7 @@ mkdir(nueva)
 for e ∈ readdir(directorio)
     println(e)
 end
-println(directorio * "\\" * nueva)
+println(directorio * "\\" * nueva) # también se puede usar `/` en lugar de `\\`
 isdir(directorio * "\\" * nueva)
 isfile(directorio * "\\" * nueva)
 
