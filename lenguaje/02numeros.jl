@@ -113,6 +113,13 @@ println(bitstring(2), "\t", length(bitstring(2)))
 println(bitstring(2.0), "\t", length(bitstring(2.0)))
 println(bitstring(2.1), "\t", length(bitstring(2.1)))
 
+x = Int16(17664)
+bitstring(x)
+y = Float16(5)
+bitstring(y)
+reinterpret(Int16, y)
+reinterpret(Float16, x)
+
 # Inf  -Inf  NaN  typemin  typemax  floatmin  floatmax
 
 println(1/0, "\t", 2.0/0, "\t", -3/0, "\t", 4.1/Inf, "\t", 0/0, "\t", 0*Inf)
@@ -128,6 +135,7 @@ println(0/0, "\t", NaN*0, "\t", NaN*false, "\t", (0/0)*false)
 println(bitstring(reinterpret(UInt64, 0/0)))
 println(bitstring(reinterpret(UInt64, NaN))) # un bit de diferencia
 
+println(NaN == NaN, "\t", NaN === NaN)
 println(0/0 == NaN, "\t", 0/0 === NaN)
 println(-0.0 == 0.0, "\t", -0.0 === 0.0)
 
