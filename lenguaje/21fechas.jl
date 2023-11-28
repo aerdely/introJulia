@@ -5,7 +5,7 @@ using Dates
 
 
 ## Definir objetos tipo fecha
-#  Date  DateTime
+#  Date  DateTime now
 
 typeof(Date)
 supertype(Date)
@@ -32,6 +32,8 @@ DateTime(2001,9,11)
 DateTime(2001,9,11,8)
 DateTime(2001,9,11,8,46,40)
 DateTime(2001,9,11,8,46,40,5)
+
+now() # Current system date and time
 
 
 ## Convertir DateTime a Date
