@@ -68,6 +68,11 @@ end
 @time_imports using OhMyREPL
 
 
+## Fecha y hora del sistema
+
+using Dates
+now()
+
 
 ## Memoria
 #  Sys.free_memory()  Sys.total_memory()  
