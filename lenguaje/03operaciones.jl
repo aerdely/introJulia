@@ -215,7 +215,7 @@ println(x, "\t", floor(x), "\t", ceil(x), "\t", trunc(x))
 #=
 div  fld  cld  rem  mod  mod2pi  divrem  fldmod  gcd  lcd  clamp  binomial
 abs  abs2  sign  signbit  copysign  flipsign  digits  ndigits
-sqrt √   cbrt ∛   hypot  exp  log  exponent  modf  evalpoly
+sqrt √   cbrt ∛  fourthroot ∜  hypot  exp  log  exponent  modf  evalpoly
 sin cos tan sinh atan etc.  sinpi  cospi  sind  etc.
 =#
 

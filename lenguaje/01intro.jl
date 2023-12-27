@@ -1,7 +1,7 @@
 ### Introducción al lenguaje de programación Julia
 ### Por Arturo Erdely basado en https://docs.julialang.org/en/v1/
 
-### Versión: 1.9.3
+### Versión: 1.10.0
 
 # Asignar valor numérico
 a = 5 
@@ -68,8 +68,11 @@ println("δ = ", δ)
 # Uso de colores y estilos
 
 printstyled("Rojo", bold = true, color = :red)
+printstyled("Verde", italic = true, color = :green)
+printstyled("Amarillo", bold = true, italic = true, color = :yellow)
 printstyled("Azul", underline = true, color = :blue)
 printstyled("Fondo amarillo", color = :yellow, reverse = true)
+
 
 for i ∈ 1:255
     printstyled(i, bold = true, color = i)
