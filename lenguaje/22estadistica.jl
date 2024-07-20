@@ -59,7 +59,7 @@ randn(ComplexF64, 3, 2)
 begin
     media(x) = sum(x) / length(x)
     varianza(x) = sum((x .- media(x)) .^2) / (length(x) - 1)
-    x = randn(1_000_000) # lo mismo que randn(Float64, 10_000)
+    x = randn(1_000_000) # lo mismo que randn(Float64, 1_000_000)
     media(x), varianza(x) # aprox (0, 1)
 end
 
