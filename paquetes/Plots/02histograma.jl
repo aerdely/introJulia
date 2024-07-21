@@ -77,35 +77,30 @@ begin
 end
 
 begin
-    w = exp.(x)
     histogram2d(x, y, bins = (40, 20), normalize = :pdf)
     xlabel!("x")
     ylabel!("y")
 end
 
 begin
-    w = exp.(x)
     histogram2d(x, y, bins = (40, 20), normalize = :pdf, show_empty_bins = true)
     xlabel!("x")
     ylabel!("y")
 end
 
 begin
-    w = exp.(x)
     histogram2d(x, y, bins = (40, 20), normalize = :pdf, color = :plasma, show_empty_bins = true)
     xlabel!("x")
     ylabel!("y")
 end
 
 begin
-    w = exp.(x)
     histogram2d(x, y, bins = (40, 20), normalize = :pdf, color = :turbo, show_empty_bins = true)
     xlabel!("x")
     ylabel!("y")
 end
 
 begin
-    w = exp.(x)
     histogram2d(x, y, bins = (40, 20), normalize = :pdf, color = :grayC, show_empty_bins = true)
     xlabel!("x")
     ylabel!("y")
