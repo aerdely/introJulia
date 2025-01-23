@@ -86,6 +86,11 @@ fgigas(Sys.free_physical_memory())
 fgigas(Sys.total_physical_memory())
 
 
+## Nombre de usuario
+
+Sys.username()
+
+
 ## Localizar paquetes y obtener versión
 
 VERSION # de Julia

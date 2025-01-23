@@ -229,7 +229,7 @@ sin cos tan sinh atan etc.  sinpi  cospi  sind  etc.
 ∩  intersect  intersect!  ∪  union  union!  length  isempty
 setdiff  setdiff! # symdiff  symdiff!  issetequal
 ∈  in  ∉  ⊆  issubset  isdisjoint
-⊊  ⊈  push!  append!  Set 
+⊊  ⊈  push!  append!  Set  in!
 =#
 
 A = [1, 2, 3, 4]
@@ -264,6 +264,7 @@ issetequal(AB, BA)
 
 println(AB)
 2 in AB
+in(2, AB)
 2 ∈ AB # \in + TAB = ∈
 2 ∉ AB # \notin + TAB = ∉
 !(2 in AB) 
@@ -297,3 +298,13 @@ length(A2)
 A3 = Set([3, 4, 5])
 A2 ∪ A3 
 A1 ∪ A3 
+
+in(0, A3)
+A3
+in!(0, A3)
+A3
+in!(0, A3)
+
+A4 = Set([3, 4, 5])
+A3 == A4
+A3 === A4

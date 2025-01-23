@@ -213,6 +213,14 @@ A
 B = [2, 3, 3, 1, 5, 2, 2, 5]
 allunique(B)
 allunique(unique(B))
+allunique(x -> x + rand(), B)
+
+
+C = [-1, 1]
+allequal(C)
+allequal(C .^ 2)
+allequal(x -> x^2, C)
+
 
 reduce(*, 1:10)
 prod(1:10)

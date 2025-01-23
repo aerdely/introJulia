@@ -252,7 +252,7 @@ t_título = titlecase(t)
 t_mayúscula_inicial = uppercasefirst(t)
 t_minúscula_inicial = lowercasefirst(t_mayúscula_inicial)
 
-# split  join  rsplit  eachsplit
+# split  join  rsplit  eachsplit  eachrsplit
 
 r = split("hola, ahí,perro", ',')
 show(r); println() 
@@ -278,6 +278,8 @@ c == d
 
 iterador = eachsplit(himno, '.')
 collect(iterador)
+iterador2 = eachrsplit(himno, '.')
+collect(iterador2)
 
 
 ## Expresiones regulares (Regex)

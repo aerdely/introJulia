@@ -59,7 +59,7 @@ randn(ComplexF64, 3, 2)
 begin
     media(x) = sum(x) / length(x)
     varianza(x) = sum((x .- media(x)) .^2) / (length(x) - 1)
-    x = randn(1_000_000) # lo mismo que randn(Float64, 1_000_000)
+    x = randn(1_000_000) # lo mimso que randn(Float64, 10_000)
     media(x), varianza(x) # aprox (0, 1)
 end
 
@@ -178,10 +178,10 @@ x == y
    Xoshiro  MersenneTwister  RandomDevice
 =#
 
-rng = Xoshiro(1234)
+rng = Xoshiro(-1234)
 typeof(rng)
 w = rand(rng, 2)
-rng = Xoshiro(1234)
+rng = Xoshiro(-1234)
 z = rand(rng, 2)
 w == z
 

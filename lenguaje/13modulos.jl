@@ -42,7 +42,7 @@ del lenguaje de programación Julia mediante `parentmodule` por ejemplo:
 =#
 
 parentmodule(println) # Base
-parentmodule(String) #Core
+parentmodule(String) # Core
 parentmodule(supertypes) # InteractiveUtils
 
 #=
@@ -519,3 +519,9 @@ saludo() # ERROR porque saludo() NO fue exportado
 # Así que:
 MiModulo.saludo()
 tipejo(Real)
+
+
+# public: variante de `export` pero los objetos no están disponibles
+#         por nombre si el módulo es llamado mediante `using`
+
+
