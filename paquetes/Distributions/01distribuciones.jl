@@ -3,7 +3,7 @@
 
 #### Basado en: https://juliastats.org/Distributions.jl/stable/ 
 
-### Versión: 0.25.100
+### Versión: 0.25.100  
 
 ### Instalar paquete
 

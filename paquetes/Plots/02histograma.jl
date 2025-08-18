@@ -1,5 +1,5 @@
 ### Histogramas, barras, pastel y mapa de calor con el paquete `Plots`
-### Dr. Arturo Erdely
+### Dr. Arturo Erdely  
 
 ### Basado en: https://docs.juliaplots.org/stable/ 
 

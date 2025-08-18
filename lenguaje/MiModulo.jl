@@ -1,4 +1,4 @@
-module MiModulo
+module MiModulo  
 
 export que, tipejo, adios
 

@@ -1,7 +1,7 @@
 ### Métodos
 ### Por Arturo Erdely basado en https://docs.julialang.org/en/v1/
 
-##  Métodos
+##  Métodos   
 #   methods  which
 
 f(x::Float64, y::Float64) = 2x + y

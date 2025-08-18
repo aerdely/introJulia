@@ -1,7 +1,7 @@
 ### Interfaces (para conjuntos iterables)
 ### Por Arturo Erdely basado en https://docs.julialang.org/en/v1/
 
-# función auxiliar
+# función auxiliar  
 function q(x) 
     println()
     println(x, "\t", typeof(x), "\t", sizeof(x), " bytes")

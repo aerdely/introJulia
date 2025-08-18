@@ -1,7 +1,7 @@
 ### Números en Julia
 ### Por Arturo Erdely basado en https://docs.julialang.org/en/v1/
 
-## Enteros ##
+## Enteros ##    
 # typeof  typemin  typemax  bitstring
 
 println(typeof(1)) # tipo de elemento

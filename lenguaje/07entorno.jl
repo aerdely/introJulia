@@ -2,7 +2,7 @@
 ### Por Arturo Erdely basado en https://docs.julialang.org/en/v1/
 
 
-## Entorno global
+## Entorno global   
 
 # `begin` es un entorno global
 

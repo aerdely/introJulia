@@ -1,5 +1,5 @@
 ### Atributos gráficos del paquete `Plots`
-### Dr. Arturo Erdely
+### Dr. Arturo Erdely  
 
 ### Basado en: https://docs.juliaplots.org/stable/ 
 

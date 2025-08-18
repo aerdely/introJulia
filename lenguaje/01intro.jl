@@ -1,10 +1,9 @@
 ### Introducción al lenguaje de programación Julia
 ### Por Arturo Erdely basado en https://docs.julialang.org/en/v1/
 
-### Versión: 1.10.0
 
 # Asignar valor numérico
-a = 5 
+a = 5   
 
 # Mostrar valor asignado mediante
 println(a)

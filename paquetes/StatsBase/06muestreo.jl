@@ -1,5 +1,5 @@
 ### Paquete `StatsBase`: Muestreo 
-### Dr. Arturo Erdely
+### Dr. Arturo Erdely  
 
 ### Basado en: https://juliastats.org/StatsBase.jl/stable/  
 

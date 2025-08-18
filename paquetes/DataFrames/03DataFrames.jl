@@ -2,7 +2,7 @@
 ### Por Dr. Arturo Erdely con base en https://dataframes.juliadata.org/stable/ 
 
 # Requiere haber instalado previamente los paquetes 
-# DataFrames, CSV
+# DataFrames, CSV  
 
 using CSV, DataFrames
 

@@ -1,7 +1,7 @@
 ### Tipos
 ### Por Arturo Erdely basado en https://docs.julialang.org/en/v1/
 
-## Declaración de tipo
+## Declaración de tipo   
 ## typeof  a::b  typeassert  summary
 
 entero = 3

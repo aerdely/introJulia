@@ -2,7 +2,7 @@
 ### Por Arturo Erdely basado en https://docs.julialang.org/en/v1/
 
 
-## Caracteres
+## Caracteres      
 #  Int  Char  isvalid  isletter  isuppercase  islowercase  isnumeric
 
 println('@', "\t typeof: ", typeof('@'), "\t Int value: ", Int('@'))

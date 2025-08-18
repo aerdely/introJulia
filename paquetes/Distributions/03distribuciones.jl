@@ -1,5 +1,5 @@
 #### Paquete `Distributions`: Modelos multivariados 
-#### Dr. Arturo Erdely
+#### Dr. Arturo Erdely  
 
 #### Basado en: https://juliastats.org/Distributions.jl/stable/ 
 

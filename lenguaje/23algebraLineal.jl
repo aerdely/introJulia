@@ -1,5 +1,5 @@
 ### Un poquito de Álgebra Lineal: Paquete `LinearAlgebra` de la biblioteca estándar de Julia
-### Por Arturo Erdely 
+### Por Arturo Erdely   
 
 #=
  **Advertencia** Aquí se aborda muy poco de lo mucho que tiene este paquete,

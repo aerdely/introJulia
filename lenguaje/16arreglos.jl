@@ -1,7 +1,7 @@
 ### Arreglos
 ### Por Arturo Erdely basado en https://docs.julialang.org/en/v1/
 
-# función auxiliar
+# función auxiliar  
 function que(x)
     println("object: \t", x)
     println("typeof: \t", typeof(x))

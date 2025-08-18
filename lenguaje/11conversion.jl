@@ -1,7 +1,7 @@
 ### Conversión y promoción
 ### Por Arturo Erdely basado en https://docs.julialang.org/en/v1/
 
-## Conversión
+## Conversión  
 #  typeof  convert  parse  tryparse  oftype  rationalize
 
 function t(tipo)

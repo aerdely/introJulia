@@ -1,5 +1,5 @@
 ### Paquete `StatsBase`: Distancias entre arreglos
-### Dr. Arturo Erdely
+### Dr. Arturo Erdely  
 
 ### Basado en: https://juliastats.org/StatsBase.jl/stable/  
 

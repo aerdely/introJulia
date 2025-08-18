@@ -1,5 +1,5 @@
 ### Introducción al paquete `Plots` por medio de ejemplos
-### Dr. Arturo Erdely
+### Dr. Arturo Erdely  
 
 ### Basado en: https://docs.juliaplots.org/stable/ 
 

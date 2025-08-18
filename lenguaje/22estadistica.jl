@@ -1,5 +1,5 @@
 ### Estadística: Paquetes `Random` y `Statistics` de la biblioteca estándar de Julia
-### Por Arturo Erdely 
+### Por Arturo Erdely   
 
 #= 
   Las funciones `rand` y `randn` son importadas automáticamente por el 

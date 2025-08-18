@@ -2,7 +2,7 @@
 ### Por Arturo Erdely basado en https://docs.julialang.org/en/v1/
 
 ## Operadores aritméticos
-#  inv  div  rem
+#  inv  div  rem   
 
 2 + 3
 2 - 3

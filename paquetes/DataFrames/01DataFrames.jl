@@ -3,7 +3,7 @@
 
 ### Con base en: https://dataframes.juliadata.org/stable/man/basics/ 
 
-### Versión: 1.6.1
+### Versión: 1.6.1  
 
 ## Requiere haber instalado previamente los paquetes 
 ## DataFrames, CSV, BenchmarkTools

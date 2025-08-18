@@ -6,7 +6,7 @@ Muestra objeto `x` junto con su tipo y tamaño.
 # Ejemplo
 ```julia
 julia> que('w')
-w       Char    4 bytes
+w       Char    4 bytes  
 ```
 """
 function que(x) # qué es esto

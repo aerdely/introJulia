@@ -1,7 +1,7 @@
 ### Constructores
 ### Por Arturo Erdely basado en https://docs.julialang.org/en/v1/
 
-struct Mascota
+struct Mascota  
     perro
     gato
     otra

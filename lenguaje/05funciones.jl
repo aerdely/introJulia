@@ -1,7 +1,7 @@
 ### Funciones
 ### Por Arturo Erdely basado en https://docs.julialang.org/en/v1/
 
-function f₁(x, y)
+function f₁(x, y)  
     x + y
 end
 

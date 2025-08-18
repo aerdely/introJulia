@@ -3,7 +3,7 @@
 
 ### Basado en: https://juliastats.org/StatsBase.jl/stable/  
 
-### Versión: 0.34.0
+### Versión: 0.34.0  
 
 
 ## Instalar paquete
