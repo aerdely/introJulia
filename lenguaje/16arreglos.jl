@@ -1,7 +1,7 @@
 ### Arreglos
 ### Por Arturo Erdely basado en https://docs.julialang.org/en/v1/
 
-# función auxiliar  
+# función auxiliar
 function que(x)
     println("object: \t", x)
     println("typeof: \t", typeof(x))
@@ -337,7 +337,7 @@ findall(ispow2, A)
 
 
 ## Iteración
-#  view  eachindex
+#  view  eachindex  eachrow  eachcol 
 
 A = rand(4, 3)
 B = view(A, 1:3, 2:3)
@@ -368,6 +368,10 @@ iterador = CartesianIndices(A)
 display(iterador[5])
 display(iterador[1,2])
 println(iterador.indices)
+
+A
+eachrow(A)
+eachcol(A)
 
 
 ## Arreglos, operaciones vectorizadas y funciones
