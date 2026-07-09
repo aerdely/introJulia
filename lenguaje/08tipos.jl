@@ -1,7 +1,7 @@
 ### Tipos
 ### Por Arturo Erdely basado en https://docs.julialang.org/en/v1/
 
-## Declaración de tipo   
+## Declaración de tipo
 ## typeof  a::b  typeassert  summary
 
 entero = 3
@@ -81,7 +81,9 @@ using BenchmarkTools
 @btime suma₂(100)
 
 
-## Tipos abstractos --> ver: https://github.com/aerdely/introJulia/blob/main/lenguaje/complementos/ArbolTipos.png
+## Tipos abstractos: 
+# https://github.com/aerdely/introJulia/blob/main/lenguaje/Julia_type_hierarchy.txt 
+# https://github.com/aerdely/introJulia/blob/main/lenguaje/Julia_type_hierarchy.pdf 
 ##  <:  supertype   subtypes  isabstracttype  isconcretetype  nameof
 
 println(Real <: Number)
@@ -217,7 +219,7 @@ mutable struct Paciente2
     edad::Int8
     peso::Float16
     estatura::Float16
-    observaciones # cualquier tipo, es decir osbervaciones::Any
+    observaciones # cualquier tipo, es decir observaciones::Any
 end
 ismutabletype(Paciente2)
 println(Paciente2, "\t", typeof(Paciente2))
@@ -256,6 +258,7 @@ p.b = 9.9 # ERROR
 ## Unión de Tipos (caso especial de tipo abstracto) 
 
 EnteroTexto = Union{Int, AbstractString}
+
 println(EnteroTexto, "\t", typeof(EnteroTexto))
 m = 333::EnteroTexto
 println(m, "\t", typeof(m))
