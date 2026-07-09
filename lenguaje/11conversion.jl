@@ -1,7 +1,7 @@
 ### Conversión y promoción
 ### Por Arturo Erdely basado en https://docs.julialang.org/en/v1/
 
-## Conversión  
+## Conversión
 #  typeof  convert  parse  tryparse  oftype  rationalize
 
 function t(tipo)
@@ -25,6 +25,7 @@ q(x)
 x_UInt8 = convert(UInt8, x)
 q(x_UInt8)
 display(x_UInt8)
+println(x_UInt8)
 t(AbstractFloat)
 x_AF = convert(AbstractFloat, x)
 q(x_AF)
@@ -77,9 +78,11 @@ x = 4; y = 3.0;
 oftype(x, y)
 oftype(y, x)
 
-convert(Rational, 5.6)
+r = convert(Rational, 5.6)
 rationalize(5.6)
 28/5
+float(r)
+r.num / r.den
 
 
 ## Promoción
