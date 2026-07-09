@@ -2,7 +2,7 @@
 ### Por Arturo Erdely basado en https://docs.julialang.org/en/v1/
 
 
-## Caracteres      
+## Caracteres
 #  Int  Char  isvalid  isletter  isuppercase  islowercase  isnumeric
 
 println('@', "\t typeof: ", typeof('@'), "\t Int value: ", Int('@'))
@@ -29,11 +29,12 @@ isnumeric('w')
 
 
 # \n (new line)  \t (tab)  \v (vertical tab)  \b (backspace)  \r (return)  chomp
-println("El mundo es color\nrosa")
-println("El mundo es color\trosa")
-println("El mundo es color\vrosa")
-println("El mundo es color\brosa")
-println("El mundo es color\rrosa")
+println("El mundo es color\nnegro")
+println("El mundo es color\tnegro")
+println("El mundo es color\vnegro")
+println("El mundo es color\bnegro")
+println("El mundo es color\b\bnegro")
+println("El mundo es color\rnegro")
 
 a = "Julia es lo\nmáximo\n"
 println(a, "fin")

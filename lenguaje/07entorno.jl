@@ -2,7 +2,7 @@
 ### Por Arturo Erdely basado en https://docs.julialang.org/en/v1/
 
 
-## Entorno global   
+## Entorno global
 
 # `begin` es un entorno global
 
@@ -16,7 +16,7 @@ println(texto)
 
 # `if` es un entorno global
 
-x = 0.0
+x = -1.0
 if x > 0.0
     x = Inf
 elseif x < 0.0
@@ -129,13 +129,15 @@ g()
 
 
 ## Constantes
-#  solo para entornos globales, avisa intentos de redefinir
-#  no recomendables si se busca optimizar código
+# Solo para entornos globales, una vez definida no permite redefinir
+# salvo que se use 'const' nuevamente.
+# No recomendables si se busca optimizar código.
 
 const K = (√5 - 1)/2
 println(typeof(K))
 println("Proporción áurea = ", K)
-K = 0.618 # aviso (warning)
+K = 0.618 # ERROR
 println("Proporción áurea = ", K)
 # pero esto no genera aviso porque es el mismo valor:
-K = 0.618
+const K = 0.618
+println("Proporción áurea = ", K)
