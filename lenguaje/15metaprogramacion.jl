@@ -1,4 +1,4 @@
-### Metaprogramación  
+### Metaprogramación
 ### Por Arturo Erdely basado en https://docs.julialang.org/en/v1/
 
 function que(x)
@@ -94,9 +94,8 @@ operación(:f, 3, 4)
 
 a = 4
 gtexto = "g(x, y) = x*y + $a"
-g = eval(Meta.parse(gtexto))
+eval(Meta.parse(gtexto))
 g(2, 5)
-dump(Meta.parse(gtexto))
 
 
 ## Macros
@@ -173,16 +172,16 @@ código = generar_código("saludar", "No")
 println(typeof(código))
 println(código)
 eval(Meta.parse(código))
-saludar("Arturo", 53)
+saludar("Arturo", 57)
 código = generar_código("conocer", "Sí")
 println(código)
 eval(Meta.parse(código))
-conocer("Arturo", 53)
+conocer("Arturo", 57)
 
 #=
 My first macro in Julia 
 https://giordano.github.io/blog/2022-06-18-first-macro/ 
 
 Metaprogramming in Julia: A Full Overview
-Fuente: https://towardsdatascience.com/metaprogramming-in-julia-a-full-overview-2b4e811f1f77
+Fuente: https://medium.com/data-science/metaprogramming-in-julia-a-full-overview-2b4e811f1f77
 =#
