@@ -1,7 +1,7 @@
 ### Constructores
 ### Por Arturo Erdely basado en https://docs.julialang.org/en/v1/
 
-struct Mascota  
+struct Mascota
     perro
     gato
     otra
@@ -176,7 +176,7 @@ methodswith(Figura)
 
 
 ## Ejemplo: Sucesión de Fibonacci
-## Autor: https://twitter.com/eliascarvdev/status/1531780420186030082?s=20&t=9R2JUs-Gnv57p2lW9OvBWw
+## Autor: https://x.com/eliascarvdev/status/1531780420186030082?s=20&t=9R2JUs-Gnv57p2lW9OvBWw
 
 struct FibSeq
     cache::Dict{Int, Int}
