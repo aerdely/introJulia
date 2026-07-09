@@ -1,0 +1,54 @@
+Any (abstract root)
+├── Number (abstract)                  # All numeric types
+│   ├── Complex{T<:Real}               # Parametric complex numbers
+│   └── Real (abstract)
+│       ├── AbstractFloat (abstract)   # Floating-point
+│       ├── Integer (abstract)
+│       ├── Rational{T<:Integer}       # Exact fractions
+│       └── AbstractIrrational (abstract)
+├── AbstractArray{T,N} (abstract)      # Arrays and array-like
+├── AbstractString (abstract)          # Strings and string-like
+├── AbstractDict{K,V} (abstract)       # Dictionaries
+├── AbstractSet{T} (abstract)          # Sets
+├── Tuple{} (heterogeneous, immutable)
+├── NamedTuple
+├── Function (abstract)                # All callable objects
+├── DataType                           # The type of types
+├── Union{} (bottom type, no instances)
+├── Module
+├── Symbol
+├── Char
+├── Expr (for ASTs)
+├── Task
+├── Missing (for missing values)
+├── Nothing (singleton for nothing)
+└── ... (many more, including exceptions, pointers, etc.)
+
+
+Number (Abstract)
+├─ Complex
+└─ Real (Abstract)
+   ├─ AbstractFloat (Abstract)
+   │  ├─ Float16
+   │  ├─ Float32
+   │  ├─ Float64
+   │  └─ BigFloat
+   ├─ Integer (Abstract)
+   │  ├─ Bool
+   │  ├─ Signed (Abstract)
+   │  │  ├─ Int8
+   │  │  ├─ Int16
+   │  │  ├─ Int32
+   │  │  ├─ Int64 (alias Int on 64-bit)
+   │  │  ├─ Int128
+   │  │  └─ BigInt
+   │  └─ Unsigned (Abstract)
+   │     ├─ UInt8
+   │     ├─ UInt16
+   │     ├─ UInt32
+   │     ├─ UInt64 (alias UInt on 64-bit)
+   │     └─ UInt128
+   ├─ Rational
+   └─ AbstractIrrational (Abstract)
+      └─ Irrational
+
