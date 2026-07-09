@@ -1,4 +1,4 @@
-### Módulos  
+### Módulos
 ### Por Arturo Erdely basado en https://docs.julialang.org/en/v1/
 
 #=
@@ -172,7 +172,7 @@ module path.
 Nótese que para usar un módulo que está en `Main` se ocupa la sintaxis:
 `using Main.MiMódulo` o bien `using .MiMódulo`
 pero si se trata de un paquete ya instalado de Julia no es necesario el punto:
-using NombrePaqueteJulia
+`using NombrePaqueteJulia`
 
 Si en un módulo no hay objetos a exportarse explícitamente mediante `export`
 no tiene sentido llamar al módulo mediante `using` sino mediante `import`,
