@@ -1,12 +1,13 @@
 ### Métodos
 ### Por Arturo Erdely basado en https://docs.julialang.org/en/v1/
 
-##  Métodos   
+##  Métodos
 #   methods  which
 
 f(x::Float64, y::Float64) = 2x + y
 println(f, "\t", typeof(f))
 println(f(2.0, 3.0))
+
 println(f(2.0, 3)) # ERROR
 
 function t(tipo)
@@ -51,6 +52,7 @@ println()
 
 
 ## Ambigüedades de métodos
+
 
 g(x::Float64, y) = 2x + y
 println(methods(g))
