@@ -442,9 +442,9 @@ display(a + b)
 sec = 1:10
 k(x) = x^2
 k.(sec)
-broadcast(k, sec) # es lo mismo que f.(sec)
+broadcast(k, sec) # es lo mismo que k.(sec)
 map(k, sec) # hace lo mismo que broadcast, pero... (ver más abajo)
-foreach(k, sec) # ejecuta la acción pero no conserva los valores f(n)
+foreach(k, sec) # ejecuta la acción pero no conserva los valores k(n)
 
 #=
 Si `sec` es un objeto iterable broadcast(f, sec) o bien f.(sec) primero
@@ -464,9 +464,9 @@ es un poco más rápido que map:
 =#
 
 sec = collect(1:1_000_000)
-@btime v = f.(sec);
-@btime b = broadcast(f, sec);
-@btime m = map(f, sec);
+@btime v = k.(sec);
+@btime b = broadcast(k, sec);
+@btime m = map(k, sec);
 
 
 ## Constructores de arreglos
