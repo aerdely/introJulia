@@ -1,7 +1,7 @@
 ### Entrada / salida (Input / output)
 ### Por Arturo Erdely basado en https://docs.julialang.org/en/v1/
 
-# función auxiliar  
+# función auxiliar
 function que(x)
     println("object: \t", x)
     T = typeof(x)
@@ -16,7 +16,7 @@ end
 ## Lectura de la línea de comandos
 #  readline
 
-# escribir directo en la línea de comandos:
+# escribir directo en la línea de comandos
 a = readline() 
 que(a)
 
@@ -271,7 +271,9 @@ rm("prueba.csv")
 
 using Downloads # paquete de la biblioteca estándar de Julia
 
-url = "https://www.dropbox.com/scl/fi/z04jstg4jbnx8b7h0bg0w/MiDescarga.txt?rlkey=uwi65orguyfmqw8u2v8k7epgd&dl=0"
+# url = "https://www.dropbox.com/scl/fi/z04jstg4jbnx8b7h0bg0w/MiDescarga.txt?rlkey=uwi65orguyfmqw8u2v8k7epgd&dl=0"
+# url = "https://github.com/aerdely/introJulia/blob/main/lenguaje/complementos/MiDescarga.txt/"
+url = "https://raw.githubusercontent.com/aerdely/introJulia/refs/heads/main/lenguaje/complementos/MiDescarga.txt"
 
 Downloads.download(url, "MiDescarga.txt")
 
